@@ -63,10 +63,10 @@
                             @csrf
                             <h3>Змініть свої контакти:</h3>
                             <label>
-                                <input type="email" name="email" class="text_bar" placeholder="(Адреса на даний час)" required>
+                                <input type="email" name="email" class="text_bar" placeholder="Email" required>
                             </label>
                             <label>
-                                <input type="tel" name="phone" class="text_bar" placeholder="(Телефон на даний час)" required>
+                                <input type="tel" name="phone" class="text_bar" placeholder="Номер телефону" required>
                             </label>
                             @if($errors->any())
                                 <div class="alert">

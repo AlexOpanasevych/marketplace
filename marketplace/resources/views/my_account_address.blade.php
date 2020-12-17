@@ -16,15 +16,31 @@
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
                         <form class="d-flex flex-column" action="" method="POST">
                             @csrf
-                            <h3>Введіть особисті данні:</h3>
+                            <h3>Введіть свою адресу:</h3>
                             <label>
-                                <input type="text" name="name" class="text_bar" placeholder="Імя" required>
+                                <select name="region" class="text_bar" required>
+                                    <option value="" disabled selected>Область</option>
+                                    <option value="м. Київ">м. Київ</option>
+                                    <option value="Київська">Київська</option>
+                                    <option value="Хмельницька">Хмельницька</option>
+                                    <option value="Донецька">Донецька</option>
+                                    <option value="Рівенська">Рівенська</option>
+                                    <option value="Одеська">Одеська</option>
+                                    <option value="Львівська">Львівська</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                <input type="text" name="city" class="text_bar" placeholder="Місто" required>
                             </label>
                             <label>
-                                <input type="text" name="lastname" class="text_bar" placeholder="Прізвище" required>
+                                <input type="text" name="street" class="text_bar" placeholder="Вулиця" required>
                             </label>
                             <label>
-                                <input type="text" name="patronymic" class="text_bar" placeholder="По батькові" required>
+                                <input type="text" name="house" class="text_bar" placeholder="Будинок" required>
+                            </label>
+                            <label>
+                                <input type="text" name="post_index" class="text_bar" placeholder="Поштовий індекс" required>
                             </label>
 
                             @if($errors->any())

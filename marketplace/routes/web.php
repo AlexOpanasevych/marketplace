@@ -40,3 +40,13 @@ Route::get('/retrieval', function () {
 Route::get('/registration', function () {
     return view('registration');
 });
+
+
+Route::get('/my-account/feedback', function () {
+    return view('my_account_feedback');
+});
+
+
+Route::get('/my-account/become-seller', function () {
+    return view('my_account_seller');
+});
