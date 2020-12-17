@@ -1,0 +1,178 @@
+body{
+    background-color: silver;
+}
+
+
+.page-content{
+    min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+}
+
+header{
+	padding: 0 200px;
+	height: 100px;
+	border-bottom: 1px solid black;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+    background-color: white;
+}
+
+header #header_buttons{
+	width: 200px;
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+}
+
+header #header_buttons img{
+	height: 40px;
+	width: 40px;
+}
+
+/* login, registration and password_retrieval pages*/
+main .login_block {
+	background-color: white;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto auto;
+	min-height: 510px;
+	width: 500px;
+	border-radius: 10px;
+}
+
+main .login_block .auth_form{
+	display: flex;
+	flex-flow: column;
+	margin-left: 50px;
+    margin-right: 50px;
+}
+
+main .login_block .auth_form label{
+	font-size: 15px;
+	margin-top: 25px;
+}
+
+main .login_block .auth_form input[type=text], input[type=email], input[type=password]{
+	height: 40px;
+	margin-top: 10px;
+	border: 1px solid #ccc;
+  	box-sizing: border-box;
+  	border-radius: 5px;
+  	padding-left: 10px;
+}
+
+main .login_block .auth_form input:focus{
+	outline: none;
+}
+
+main .login_block .auth_form .auth_settings{
+	display: flex;
+	margin-top: 25px;
+	justify-content: space-between;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox{
+	display: block;
+	margin-top: 0;
+  	position: relative;
+  	padding-left: 35px;
+  	cursor: pointer;
+  	font-size: 16px;
+  	-webkit-user-select: none;
+  	-moz-user-select: none;
+  	-ms-user-select: none;
+  	user-select: none;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox input{
+	position: absolute;
+  	opacity: 0;
+  	cursor: pointer;
+  	height: 0;
+  	width: 0;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox .checkmark{
+	position: absolute;
+  	bottom: -3px;
+  	left: 0;
+  	height: 25px;
+  	width: 25px;
+  	background-color: #eee;
+  	border-radius: 5px;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox:hover input ~ .checkmark{
+	background-color: #ccc;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox input:checked ~ .checkmark{
+	background-color: #499F68;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox .checkmark:after{
+	content: "";
+  	position: absolute;
+  	display: none;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox input:checked ~ .checkmark:after{
+	display: block;
+}
+
+main .login_block .auth_form .auth_settings .new_checkbox .checkmark:after{
+	left: 9px;
+ 	top: 4px;
+  	width: 5px;
+  	height: 10px;
+  	border: solid white;
+  	border-width: 0 3px 3px 0;
+  	-webkit-transform: rotate(45deg);
+  	-ms-transform: rotate(45deg);
+  	transform: rotate(45deg);
+}
+
+main .login_block .auth_form .auth_settings a{
+	font-size: 16px;
+	text-decoration: none;
+	color: #4F7CAC;
+}
+main .login_block .auth_form .auth_settings a:hover{
+	color: red;
+	text-decoration: underline;
+}
+
+main .login_block .auth_form .form_auth_button{
+	border: none;
+	width: 400px;
+	height: 50px;
+	background-color: #499F68;
+	margin-top: 25px;
+	border-radius: 5px;
+	font-size: 20px;
+	color: #fff;
+}
+
+main .login_block .auth_form #go_to_reg{
+	margin: 25px auto;
+	text-decoration: none;
+	color: #4F7CAC;
+	font-size: 20px;
+}
+
+main .login_block .auth_form #go_to_reg:hover{
+	color: red;
+	text-decoration: underline;
+}
+/* login, registration and password_retrieval pages*/
+/* main page */
