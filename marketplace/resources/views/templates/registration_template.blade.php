@@ -17,13 +17,9 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <title>@yield('title')</title>
 </head>
-<body>
+<body style="background-color: silver">
 @include('inc.header')
-<div class="page-content">
-    <div class="container">
-    @yield('page-content')
-    </div>
-</div>
+@yield('page-content')
 @include('inc.footer')
 
 </body>

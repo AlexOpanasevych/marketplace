@@ -302,3 +302,14 @@
     resize: none;
     font-size: 15px;
 }
+
+.chosen_cancel{
+    height: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.account-order-list small{
+    font-size: 15px;
+}

@@ -50,3 +50,21 @@ Route::get('/my-account/feedback', function () {
 Route::get('/my-account/become-seller', function () {
     return view('my_account_seller');
 });
+
+
+Route::get('/my-account/chosen', function () {
+    return view('my_account_chosen');
+});
+
+Route::get('/my-account/my-orders', function () {
+    return view('my_account_orders');
+});
+
+Route::get('/my-account/my-items', function () {
+    return view('my_account_seller_items');
+});
+
+
+Route::get('/my-account/my-statistics', function () {
+    return view('my_account_statistics');
+});

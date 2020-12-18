@@ -19,7 +19,7 @@
                             <h3>Введіть текст повідомлення:</h3>
 
                             <label>
-                                <textarea name="comment" rows="12" form="text-form" placeholder="Введіть текст повідомлення..."></textarea>
+                                <textarea style="border-radius: 20px; padding: 20px; outline: none;" name="comment" rows="12" form="text-form" placeholder="Введіть текст повідомлення..."></textarea>
                             </label>
                             @if($errors->any())
                                 <div class="alert">

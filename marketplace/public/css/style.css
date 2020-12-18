@@ -1,8 +1,3 @@
-body{
-    background-color: silver;
-}
-
-
 .page-content{
     min-height: 100vh;
 }
@@ -15,27 +10,140 @@ body{
 }
 
 header{
-	padding: 0 200px;
-	height: 100px;
-	border-bottom: 1px solid black;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-    background-color: white;
+    padding: 0 200px;
+    height: 100px;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #052539;
+}
+
+header div{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+header #catalog .categories_popup_btn{
+    height: 40px;
+    width: 200px;
+    font-size: 18px;
+    color: white;
+    background-color: #052539;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+header #catalog .categories_popup_btn:hover{
+    filter: brightness(120%);
+}
+
+header #catalog .categories_popup_btn:focus{
+    outline: none;
+    filter: brightness(120%);
+}
+
+header #catalog .categories_popup_fade{
+    display: none;
+}
+
+
+header #catalog .categories_popup_fade:before{
+    content: '';
+    background: #000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    z-index: 9999;
+}
+
+header #catalog .categories_popup_fade .categories_popup{
+    position: fixed;
+    top: 85px;
+    padding: 20px;
+    width: 996px;
+    background: #fff;
+    border-radius: 5px;
+    z-index: 9999;
+    opacity: 1;
+}
+
+header #catalog .categories_popup_fade .categories_popup:before{
+    content: ' ';
+    position: fixed;
+    width: 0;
+    height: 0;
+    left: 515px;
+    top: 60px;
+    border: 13px solid;
+    border-color: transparent transparent  #fff;
+}
+
+header #catalog .categories_popup_fade .categories_popup a{
+    border-right: 1px solid #4F7CAC;
+    padding: 0 10px 0 5px;
+    text-decoration: none;
+    color: #4F7CAC;
+}
+
+header #catalog .categories_popup_fade .categories_popup a:hover{
+    color: red;
+}
+
+header #product_search{
+    display: flex;
+    height: 40px;
+    width: 700px;
+}
+
+header #product_search input[type="search"]{
+    border: none;
+    height: 40px;
+    width: 575px;
+    font-size: 18px;
+    color: black;
+    padding-left: 25px;
+    border-right: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+header #product_search input[type="search"]:focus{
+    outline: none;
+}
+
+header #product_search input[type="submit"]{
+    font-size: 18px;
+    height: 40px;
+    width: 125px;
+    border: none;
+    outline: none;
+    background-color: #499F68;
+    color: white;
+    cursor: pointer;
+
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+header #product_search input[type="submit"]:hover{
+    filter: brightness(120%);
 }
 
 header #header_buttons{
-	width: 200px;
-	display: flex;
-	flex-flow: row;
-	justify-content: space-between;
+    width: 200px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
 }
 
 header #header_buttons img{
-	height: 40px;
-	width: 40px;
+    height: 40px;
+    width: 40px;
 }
-
 /* login, registration and password_retrieval pages*/
 main .login_block {
 	background-color: white;
@@ -75,13 +183,13 @@ main .login_block .auth_form input:focus{
 	outline: none;
 }
 
-main .login_block .auth_form .auth_settings{
+ .auth_settings{
 	display: flex;
 	margin-top: 25px;
 	justify-content: space-between;
 }
 
-main .login_block .auth_form .auth_settings .new_checkbox{
+ .new_checkbox{
 	display: block;
 	margin-top: 0;
   	position: relative;
@@ -94,7 +202,7 @@ main .login_block .auth_form .auth_settings .new_checkbox{
   	user-select: none;
 }
 
-main .login_block .auth_form .auth_settings .new_checkbox input{
+ .new_checkbox input{
 	position: absolute;
   	opacity: 0;
   	cursor: pointer;
@@ -102,7 +210,7 @@ main .login_block .auth_form .auth_settings .new_checkbox input{
   	width: 0;
 }
 
-main .login_block .auth_form .auth_settings .new_checkbox .checkmark{
+.new_checkbox .checkmark{
 	position: absolute;
   	bottom: -3px;
   	left: 0;
@@ -112,11 +220,11 @@ main .login_block .auth_form .auth_settings .new_checkbox .checkmark{
   	border-radius: 5px;
 }
 
-main .login_block .auth_form .auth_settings .new_checkbox:hover input ~ .checkmark{
+ .new_checkbox:hover input ~ .checkmark{
 	background-color: #ccc;
 }
 
-main .login_block .auth_form .auth_settings .new_checkbox input:checked ~ .checkmark{
+ .new_checkbox input:checked ~ .checkmark{
 	background-color: #499F68;
 }
 
@@ -131,8 +239,8 @@ main .login_block .auth_form .auth_settings .new_checkbox input:checked ~ .check
 }
 
 main .login_block .auth_form .auth_settings .new_checkbox .checkmark:after{
-	left: 9px;
- 	top: 4px;
+	left: 10px;
+ 	top: 5px;
   	width: 5px;
   	height: 10px;
   	border: solid white;
@@ -152,7 +260,7 @@ main .login_block .auth_form .auth_settings a:hover{
 	text-decoration: underline;
 }
 
-main .login_block .auth_form .form_auth_button{
+ .form_auth_button{
 	border: none;
 	width: 400px;
 	height: 50px;
@@ -175,4 +283,133 @@ main .login_block .auth_form #go_to_reg:hover{
 	text-decoration: underline;
 }
 /* login, registration and password_retrieval pages*/
+main{
+    background-color: #fff	;
+}
+
+ .main_page{
+    display: grid;
+    padding: 0 200px;
+    grid-auto-rows: 0;
+}
+
+ .main_page .left_pos{
+    height: 420px;
+    width: 249px;
+    display: flex;
+    flex-flow: column;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-top: 35px;
+
+}
+
+ .main_page .left_pos a{
+    margin-top: 5px;
+    font-size: 17px;
+    color: #4F7CAC;
+    text-decoration: none;
+}
+
+ .main_page .left_pos a:hover{
+    color: red;
+}
+
+ .main_page .products{
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding-left: 250px;
+    padding-top: 35px;
+}
+
+ .main_page .products .product{
+    height: 420px;
+    width: 300px;
+    position: relative;
+    margin-bottom: 50px;
+    z-index: -1;
+}
+
+ .main_page .products .product:hover{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+ .main_page .products .product .add_product_to{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    border-radius: 5px;
+    margin: 10px 10px;
+}
+
+ .main_page .products .product .add_product_to .fav_icon{
+    content: url(../img/add_to_favourite.svg);
+    height: 30px;
+    width: 30px;
+    margin: 5px 4px;
+}
+
+
+ .main_page .products .product .add_product_to .cart_icon{
+    content: url(../img/add_to_cart.svg);
+    height: 30px;
+    width: 30px;
+    margin: 5px 4px;
+}
+
+ .main_page .products .product .add_product_to:hover{
+    background-color: #EEEDE7;
+    cursor: pointer;
+}
+
+ .main_page .products .product .product_icon{
+    padding: 50px 50px 0 50px;
+    height: 300px;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+ .main_page .products .product .product_name{
+    font-size: 16px;
+    margin: 20px 20px 15px 20px;
+}
+
+ .main_page .products .product .product_price{
+    font-size: 24px;
+    margin: 0 20px;
+}
+/* main page */
+
+ .add_to_favourite:hover{
+    background-color: #D6E4FF;
+    cursor: pointer;
+}
+
+ .product_icon{
+    padding: 50px 50px 0 50px;
+    height: 300px;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+ .product_name{
+    font-size: 16px;
+    margin: 20px 20px 15px 20px;
+}
+
+ .product_price{
+    font-size: 24px;
+    margin: 0 20px;
+}
 /* main page */
