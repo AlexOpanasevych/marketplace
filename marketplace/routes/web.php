@@ -68,3 +68,8 @@ Route::get('/my-account/my-items', function () {
 Route::get('/my-account/my-statistics', function () {
     return view('my_account_statistics');
 });
+
+
+Route::get('/my-account/my-items-order', function () {
+    return view('my_account_seller_orders');
+});

@@ -21,7 +21,12 @@
             </p>
         </div>
     </div>
-    <button style="width: 100%; font-size: 14px; height: 40px; margin: 0; color: white" class="btn mt-auto btn-lg btn-block">
-        Змінити
-    </button>
+    <div class="mt-auto">
+        <button style="width: 100%; font-size: 14px; height: 40px; margin: 0; color: white" class="btn  btn-lg btn-block">
+            Змінити
+        </button>
+        <button style="width: 100%; font-size: 14px; height: 40px; color: white; background-color: #4F7CAC !important; margin: 5px 0 0;" class="btn  btn-lg btn-block">
+            Просувати товар
+        </button>
+    </div>
 </div>

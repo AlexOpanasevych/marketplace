@@ -20,7 +20,7 @@
                             <a href=""><img style="height: 30px" src="{{asset('img/plus.svg')}}"></a>
                         </div>
                         <div class="row wow fadeIn card-deck">
-                            @foreach([1,2,3,4,5,6] as $i)
+                        @foreach([1,2,3,4,5,6] as $i)
                                 <div class="col-lg-4 d-flex align-items-stretch" style="">
                                     @include('inc.my-account-seller-item')
                                 </div>
