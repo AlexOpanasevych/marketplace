@@ -21,15 +21,8 @@
     <title>@yield('title')</title>
 </head>
 <body>
-<div class="not-fixed-header">
-    @include('inc.header')
-</div>
-<div class="page-content">
-    <div class="container">
-    @yield('page-content')
-    </div>
-</div>
+@include('inc.header')
+@yield('page-content')
 @include('inc.footer')
-
 </body>
 </html>

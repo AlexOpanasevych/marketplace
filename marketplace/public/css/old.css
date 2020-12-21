@@ -313,3 +313,9 @@
 .account-order-list small{
     font-size: 15px;
 }
+
+.not-fixed-header header{
+    position: relative !important;
+}
+
+

@@ -3,26 +3,25 @@
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
 }
 
 header{
-    padding: 0 200px;
+    padding: 0 150px;
     height: 100px;
     border-bottom: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #052539;
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
 }
 
-header div{
-    margin-right: 5px;
-    margin-left: 5px;
-}
 
 header #catalog .categories_popup_btn{
     height: 40px;
@@ -57,17 +56,17 @@ header #catalog .categories_popup_fade:before{
     width: 100%;
     height: 100%;
     opacity: 0.7;
-    z-index: 9999;
+    z-index: 9;
 }
 
 header #catalog .categories_popup_fade .categories_popup{
     position: fixed;
     top: 85px;
     padding: 20px;
-    width: 996px;
+    width: 985px;
     background: #fff;
     border-radius: 5px;
-    z-index: 9999;
+    z-index: 10;
     opacity: 1;
 }
 
@@ -76,7 +75,7 @@ header #catalog .categories_popup_fade .categories_popup:before{
     position: fixed;
     width: 0;
     height: 0;
-    left: 515px;
+    left: 400px;
     top: 60px;
     border: 13px solid;
     border-color: transparent transparent  #fff;
@@ -96,13 +95,12 @@ header #catalog .categories_popup_fade .categories_popup a:hover{
 header #product_search{
     display: flex;
     height: 40px;
-    width: 700px;
 }
 
 header #product_search input[type="search"]{
     border: none;
     height: 40px;
-    width: 575px;
+    width: 500px;
     font-size: 18px;
     color: black;
     padding-left: 25px;
@@ -134,166 +132,167 @@ header #product_search input[type="submit"]:hover{
 }
 
 header #header_buttons{
-    width: 200px;
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
 }
 
 header #header_buttons img{
     height: 40px;
     width: 40px;
 }
+
 /* login, registration and password_retrieval pages*/
 main .login_block {
-	background-color: white;
-    position: relative;
+    background-color: white;
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     margin: auto auto;
-	min-height: 510px;
-	width: 500px;
-	border-radius: 10px;
+    height: 600px;
+    width: 500px;
+    border-radius: 10px;
 }
 
 main .login_block .auth_form{
-	display: flex;
-	flex-flow: column;
-	margin-left: 50px;
-    margin-right: 50px;
+    display: flex;
+    flex-flow: column;
+    margin: 50px 50px 0 50px
 }
 
 main .login_block .auth_form label{
-	font-size: 15px;
-	margin-top: 25px;
+    font-size: 15px;
+    margin-top: 25px;
 }
 
 main .login_block .auth_form input[type=text], input[type=email], input[type=password]{
-	height: 40px;
-	margin-top: 10px;
-	border: 1px solid #ccc;
-  	box-sizing: border-box;
-  	border-radius: 5px;
-  	padding-left: 10px;
+    height: 40px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 10px;
 }
 
-main .login_block .auth_form input:focus{
-	outline: none;
+ .auth_form input:focus{
+    outline: none;
 }
 
- .auth_settings{
-	display: flex;
-	margin-top: 25px;
-	justify-content: space-between;
+.auth_settings{
+    display: flex;
+    margin-top: 25px;
+    justify-content: space-between;
 }
 
- .new_checkbox{
-	display: block;
-	margin-top: 0;
-  	position: relative;
-  	padding-left: 35px;
-  	cursor: pointer;
-  	font-size: 16px;
-  	-webkit-user-select: none;
-  	-moz-user-select: none;
-  	-ms-user-select: none;
-  	user-select: none;
+.new_checkbox{
+    display: block;
+    margin-top: 0;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
- .new_checkbox input{
-	position: absolute;
-  	opacity: 0;
-  	cursor: pointer;
-  	height: 0;
-  	width: 0;
+.new_checkbox input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
-.new_checkbox .checkmark{
-	position: absolute;
-  	bottom: -3px;
-  	left: 0;
-  	height: 25px;
-  	width: 25px;
-  	background-color: #eee;
-  	border-radius: 5px;
+main .login_block .auth_form .auth_settings .new_checkbox .checkmark{
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
 }
 
- .new_checkbox:hover input ~ .checkmark{
-	background-color: #ccc;
+main .login_block .auth_form .auth_settings .new_checkbox:hover input ~ .checkmark{
+    background-color: #ccc;
 }
 
- .new_checkbox input:checked ~ .checkmark{
-	background-color: #499F68;
+main .login_block .auth_form .auth_settings .new_checkbox input:checked ~ .checkmark{
+    background-color: #499F68;
 }
 
 main .login_block .auth_form .auth_settings .new_checkbox .checkmark:after{
-	content: "";
-  	position: absolute;
-  	display: none;
+    content: "";
+    position: absolute;
+    display: none;
 }
 
 main .login_block .auth_form .auth_settings .new_checkbox input:checked ~ .checkmark:after{
-	display: block;
+    display: block;
 }
 
 main .login_block .auth_form .auth_settings .new_checkbox .checkmark:after{
-	left: 10px;
- 	top: 5px;
-  	width: 5px;
-  	height: 10px;
-  	border: solid white;
-  	border-width: 0 3px 3px 0;
-  	-webkit-transform: rotate(45deg);
-  	-ms-transform: rotate(45deg);
-  	transform: rotate(45deg);
+    left: 10px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 main .login_block .auth_form .auth_settings a{
-	font-size: 16px;
-	text-decoration: none;
-	color: #4F7CAC;
+    font-size: 16px;
+    text-decoration: none;
+    color: #4F7CAC;
 }
 main .login_block .auth_form .auth_settings a:hover{
-	color: red;
-	text-decoration: underline;
+    color: red;
+    text-decoration: underline;
 }
 
- .form_auth_button{
-	border: none;
-	width: 400px;
-	height: 50px;
-	background-color: #499F68;
-	margin-top: 25px;
-	border-radius: 5px;
-	font-size: 20px;
-	color: #fff;
+main .login_block .auth_form .form_auth_button{
+    border: none;
+    width: 400px;
+    height: 50px;
+    background-color: #499F68;
+    margin-top: 25px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
 }
 
 main .login_block .auth_form #go_to_reg{
-	margin: 25px auto;
-	text-decoration: none;
-	color: #4F7CAC;
-	font-size: 20px;
+    margin: 25px auto;
+    text-decoration: none;
+    color: #4F7CAC;
+    font-size: 20px;
 }
 
 main .login_block .auth_form #go_to_reg:hover{
-	color: red;
-	text-decoration: underline;
+    color: red;
+    text-decoration: underline;
 }
 /* login, registration and password_retrieval pages*/
+
+/* main page */
 main{
-    background-color: #fff	;
+    background-color: #fff;
+    padding-top: 100px;
 }
 
- .main_page{
+main .main_page{
     display: grid;
     padding: 0 200px;
     grid-auto-rows: 0;
 }
 
- .main_page .left_pos{
+.left_pos{
     height: 420px;
     width: 249px;
     display: flex;
@@ -309,40 +308,39 @@ main{
 
 }
 
- .main_page .left_pos a{
+.left_pos a{
     margin-top: 5px;
     font-size: 17px;
     color: #4F7CAC;
     text-decoration: none;
 }
 
- .main_page .left_pos a:hover{
+.left_pos a:hover{
     color: red;
 }
 
- .main_page .products{
+.products{
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    padding-left: 250px;
+    padding-left: 150px;
+    padding-right: 150px;
     padding-top: 35px;
 }
 
- .main_page .products .product{
+.products .product{
     height: 420px;
     width: 300px;
     position: relative;
     margin-bottom: 50px;
-    z-index: -1;
 }
 
- .main_page .products .product:hover{
-    border: 1px solid #ccc;
+ .products .product:hover{
+    box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
-
 }
 
- .main_page .products .product .add_product_to{
+.products .product .add_product_to{
     width: 40px;
     height: 40px;
     position: absolute;
@@ -351,7 +349,7 @@ main{
     margin: 10px 10px;
 }
 
- .main_page .products .product .add_product_to .fav_icon{
+.products .product .add_product_to .fav_icon{
     content: url(../img/add_to_favourite.svg);
     height: 30px;
     width: 30px;
@@ -359,19 +357,19 @@ main{
 }
 
 
- .main_page .products .product .add_product_to .cart_icon{
+.products .product .add_product_to .cart_icon{
     content: url(../img/add_to_cart.svg);
     height: 30px;
     width: 30px;
     margin: 5px 4px;
 }
 
- .main_page .products .product .add_product_to:hover{
+ .products .product .add_product_to:hover{
     background-color: #EEEDE7;
     cursor: pointer;
 }
 
- .main_page .products .product .product_icon{
+ .products .product .product_icon{
     padding: 50px 50px 0 50px;
     height: 300px;
     width: 100%;
@@ -379,37 +377,192 @@ main{
     border-top-right-radius: 5px;
 }
 
- .main_page .products .product .product_name{
+ .products .product .product_name{
     font-size: 16px;
     margin: 20px 20px 15px 20px;
 }
 
- .main_page .products .product .product_price{
+.products .product .product_price{
     font-size: 24px;
     margin: 0 20px;
 }
 /* main page */
 
- .add_to_favourite:hover{
-    background-color: #D6E4FF;
+/* cart page */
+
+main .num_of_products{
+    padding-top: 35px;
+    text-align: center;
+    font-size: 30px;
+}
+
+ .shopping_horizontal_line_up{
+    width: 350px;
+    height: 1px;
+    background: black;
+    margin: 35px auto 40px;
+    opacity: 60%;
+}
+
+ .owl-dot{
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+ .owl-dot span{
+    background: white;
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
+}
+ .owl-dots .owl-dot.active span{
+    background: #4F7CAC;
+}
+.owl-dots .owl-dot:hover span{
+    background: #4F7CAC;
+}
+
+.owl-dots .owl-dot:focus{
+    outline: none;
+}
+
+ .owl-carousel{
+    padding: 0 200px 0 200px;
+}
+
+ .owl-carousel #shopping_items{
+    display: flex;
+    align-items: center;
+    height: 430px;
+}
+
+ .owl-carousel #shopping_items .shopping_piece{
+    display: flex;
+    flex-flow: column;
+    transition: 0.2s;
+    border-radius: 20px;
+    width: 300px;
+    height: 380px;
+}
+
+main .owl-carousel #shopping_items .shopping_piece:hover{
+    box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+    cursor: help;
+
+}
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_picture {
+    border-radius: 20px;
+    margin: 0 35px;
+    width: 225px;
+    height: 275px;
+
+}
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_top_panel{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_top_panel .cancel_back{
+    width: 40px;
+    height: 40px;
+    opacity: 0.9;
+    background: rgba(219,43,57, 0.5);
+
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_top_panel .cancel_back:hover{
+    background: rgb(219,43,57);
+
     cursor: pointer;
 }
 
- .product_icon{
-    padding: 50px 50px 0 50px;
-    height: 300px;
+main .owl-carousel #shopping_items .shopping_piece .shopping_top_panel .cancel_back .cancel{
+    content: url("../img/cancel.png");
+    width: 20px;
+    margin: 10px 10px;
+}
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_top_panel .add_more_back{
+    width: 40px;
+    height: 40px;
+    opacity: 0.9;
+    background: rgba(79, 124, 172, 0.5);
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_top_panel .add_more_back:hover{
+    background: rgb(79, 124, 172);
+    cursor: pointer;
+}
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_top_panel .add_more_back .add_more{
+    font-size: 20px;
+    margin: 8px;
+}
+
+main .owl-carousel #shopping_items .shopping_piece .shopping_bottom_panel{
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    bottom: 0;
     width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    height: 60px;
+    opacity: 0.9;
+    margin-top: 10px;
+    background: #fefcfd;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top: 1px solid #ccc;
+    font-size: 20px;
 }
 
- .product_name{
-    font-size: 16px;
-    margin: 20px 20px 15px 20px;
+main #shopping_horizontal_line_down{
+    width: 550px;
+    height: 1px;
+    background: black;
+    margin: 50px auto 40px;
+    opacity: 60%;
 }
 
- .product_price{
+main #shopping_bottom_block{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+main #shopping_bottom_block .shopping_buttons{
+    display: flex;
+    flex-flow: row;
+    padding: 35px 0;
+}
+
+main #shopping_bottom_block .shopping_buttons .shopping_catalog_and_buy_buttons{
+    height: 80px;
+    width: 250px;
+    background: #4F7CAC;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0 23px;
+    transition: 0.2s;
+    text-decoration: none;
+    color: white;
+    padding-top: 25px;
     font-size: 24px;
-    margin: 0 20px;
+    font-style: normal;
 }
-/* main page */
+
+main #shopping_bottom_block .shopping_buttons .shopping_catalog_and_buy_buttons:hover{
+    box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.2s;
+}
+
+/* cart page */
