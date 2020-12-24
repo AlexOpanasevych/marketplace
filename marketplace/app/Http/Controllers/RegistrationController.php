@@ -15,8 +15,8 @@ class RegistrationController extends Controller
             'email.required' => 'Введіть , будь ласка email',
             'email.email' => 'email введено неправильно',
             'password.required' => 'Введіть , будь ласка пароль',
-            'password-repeat.required' => 'Введіть , будь ласка підтвердження паролю',
-            'password-repeat.same' => 'Пароль та його підтвердження не співпадають',
+//            'password-repeat.required' => 'Введіть , будь ласка підтвердження паролю',
+//            'password-repeat.same' => 'Пароль та його підтвердження не співпадають',
         ];
         $result = null;
         try {
@@ -24,21 +24,25 @@ class RegistrationController extends Controller
                 'name' => 'required',
                 'email' => 'required|email',
                 'password' => 'required',
-                'password-repeat' => 'required|same:password',
+//                'password-repeat' => 'required|same:password',
             ], $messages);
         } catch (ValidationException $e) {
+            $request->session()->regenerate();
             return back()->withErrors($e->errors());
         }
+
         if (User::where('email', '=', $request->input('email'))->count() > 0) {
+            $request->session()->regenerate();
             return back()->withErrors(['user.exists' => 'Користувач з заданою електронною поштою вже існує!']);
         }
         if (User::where('name', '=', $request->input('name'))->count() > 0) {
+            $request->session()->regenerate();
             return back()->withErrors(['user.exists' => 'Користувач з заданим ім\'ям вже існує!']);
         }
         $user = User::create(request(['name', 'email', 'password']));
 
         Auth::login($user, true);
 
-        return redirect()->intended('home');
+        return back();
     }
 }

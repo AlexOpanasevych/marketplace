@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83c54f9b-8c6b-4e47-a281-f72e618396f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/marketplace/public/css/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marketplace/public/js/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/marketplace/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/marketplace/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/app/Http/Controllers/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/app/Http/Controllers/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/resources/views/inc/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/resources/views/inc/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/resources/views/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/resources/views/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/resources/views/registration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/resources/views/registration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,9 +141,14 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../musichunt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/marketplace/app/Http/Controllers" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Sashko\PhpstormProjects\marketplace\marketplace\app\Http\Controllers" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -150,7 +159,7 @@
       <option name="presentableId" value="Default" />
       <updated>1608394932312</updated>
       <workItem from="1608394933572" duration="800000" />
-      <workItem from="1608723460530" duration="10490000" />
+      <workItem from="1608723460530" duration="21130000" />
     </task>
     <servers />
   </component>
