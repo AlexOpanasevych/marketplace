@@ -93,7 +93,7 @@ class SessionController extends Controller
             'lastname.required' => 'Будь ласка, введіть прізвище',
             'patronymic.required' => 'Будь ласка, введіть по-батькові'
         ];
-        $validator = Validator::make($request, [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'lastname' => 'required',
             'patronymic' => 'required',
