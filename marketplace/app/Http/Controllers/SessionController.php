@@ -100,13 +100,13 @@ class SessionController extends Controller
         ], $messages);
         if(!$validator->fails()) {
 
-            $name = $request->name;
+            $firstname = $request->name;
             $lastname = $request->lastname;
             $patronymic = $request->patronymic;
             if(Auth::check()) {
                 $user_id = Auth::user()->id;
                 $obj_user = User::find($user_id);
-                $obj_user->name = $name;
+                $obj_user->firstname = $firstname;
                 $obj_user->lastname = $lastname;
                 $obj_user->patronymic = $patronymic;
                 $obj_user->save();
@@ -125,11 +125,10 @@ class SessionController extends Controller
             'email.email' => 'Будь ласка, введіть email правильно',
             'email.required' => 'Будь ласка, введіть email',
             'phone.required' => 'Будь ласка, введіть номер телефону',
-            'phone.phone' => 'Будь ласка, введіть правильно номер телефону'
         ];
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'phone' => 'required|phone',
+            'phone' => 'required',
         ], $messages);
 
         if(!$validator->fails()) {
@@ -140,7 +139,7 @@ class SessionController extends Controller
             if(Auth::check()) {
                 $user_id = Auth::user()->id;
                 $obj_user = User::find($user_id);
-                $obj_user->name = $email;
+                $obj_user->email = $email;
                 $obj_user->phone = $phone;
                 $obj_user->save();
                 return back();
