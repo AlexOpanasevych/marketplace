@@ -17,7 +17,7 @@
     <div id=header_buttons>
         <a href="{{route('chosen')}}"><img src="img/favorites.svg"></a>
         <a href="{{route('cart')}}"><img src="img/cart.svg"></a>
-        <a href="{{route('login')}}"><img src="img/profile.svg"></a>
+        <a href="{{route('info')}}"><img src="img/profile.svg"></a>
     </div>
 </header>
 

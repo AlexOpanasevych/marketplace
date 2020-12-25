@@ -20,7 +20,7 @@
 
 <div class="d-flex flex-column justify-content-center account-greeting">
     <p style="margin-bottom: 5px">Вітаю,</p>
-{{--    <p class = "account-username">@if(auth()->check()) {{auth()->user()->name}} @endif</p>--}}
+    <p class = "account-username">@if(auth()->check()) {{auth()->user()->name}} @endif</p>
     <p class = "account-username">user-email</p>
 </div>
 

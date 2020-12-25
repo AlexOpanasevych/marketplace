@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class RegistrationController extends Controller
@@ -39,7 +40,7 @@ class RegistrationController extends Controller
             $request->session()->regenerate();
             return back()->withErrors(['user.exists' => 'Користувач з заданим ім\'ям вже існує!']);
         }
-        $user = User::create(request(['name', 'email', 'password']));
+        $user = User::create(['name' => $request->name, 'email' => $request->email, 'password' => Hash::make($request->password)]);
 
         Auth::login($user, true);
 

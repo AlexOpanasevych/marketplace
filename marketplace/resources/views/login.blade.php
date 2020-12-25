@@ -18,7 +18,7 @@
                         <input type="checkbox" name="remember">
                         <span class="checkmark"></span>
                     </label>
-                    <a href="{{route('reset_password')}}"><p style="margin: 0">Забули пароль?</p></a>
+                    <a href="{{route('reset-password')}}"><p style="margin: 0">Забули пароль?</p></a>
                 </div>
                 <button class="form_auth_button" type="submit" name="auth_form_submit">Увійти</button>
                 <a href="{{route('registration')}}" id=go_to_reg><p>Зареєструватися</p></a>

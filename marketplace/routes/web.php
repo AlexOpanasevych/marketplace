@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,10 +36,14 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', [SessionController::class, 'store'])->name('login');
+Route::get('/logout', function () {
+    Auth::logout();
+    return view('welcome');
+});
 
-Route::get('/retrieval', function () {
+Route::get('/forgot-password', function () {
     return view('password_retrieval');
-})->name('reset_password');
+})->name('reset-password');
 
 
 Route::get('/registration', function () {
@@ -84,3 +89,16 @@ Route::get('/my-account/my-items-order', function () {
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
+
+Route::post('/my-account/change-user-data', [SessionController::class, 'changeUserData'])->name('change-udata');
+Route::post('/my-account/change-password', [SessionController::class, 'changePassword'])->name('change-password');
+Route::post('/my-account/change-contacts', [SessionController::class, 'changeContacts'])->name('change-contacts');
+Route::post('/forgot-password', [SessionController::class, 'resetPassword'])->name('reset-password');
+
+// Password reset link request routes...
+Route::get('password/email', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.email');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+
+// Password reset routes...
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
