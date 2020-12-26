@@ -44,6 +44,6 @@ class RegistrationController extends Controller
 
         Auth::login($user, true);
 
-        return redirect()->intended('welcome');
+        return redirect()->route('home');
     }
 }

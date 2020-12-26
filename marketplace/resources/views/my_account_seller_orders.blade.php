@@ -7,7 +7,7 @@
         <h1 style="color: black">Особистий кабінет</h1>
         <div class="row">
             <div class="col-md-3 account-menu">
-                @include('inc.my-account-menu')
+                @include('inc.my-account-menu', ['seller' => $seller])
             </div>
             <div class="col-md-9 left-part">
                 <div class="account-content">

@@ -7,14 +7,14 @@
         <h1 style="color: black">Особистий кабінет</h1>
         <div class="row">
             <div class="col-md-3 account-menu">
-                @include('inc.my-account-menu')
+                @include('inc.my-account-menu', ['seller' => $seller])
             </div>
             <div class="col-md-9 left-part">
                 <div class="account-content">
                     <div class="my-info">
                         <h1>Моя адреса</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
-                        <form class="d-flex flex-column" action="" method="POST">
+                        <form class="d-flex flex-column" action="{{route('address')}}" method="POST">
                             @csrf
                             <h3>Введіть свою адресу:</h3>
                             <label>

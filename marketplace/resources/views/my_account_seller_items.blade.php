@@ -7,12 +7,12 @@
         <h1 style="color: black">Особистий кабінет</h1>
         <div class="row">
             <div class="col-md-3 account-menu">
-                @include('inc.my-account-menu')
+                @include('inc.my-account-menu', ['seller' => $seller])
             </div>
             <div class="col-md-9 left-part">
                 <div class="account-content">
                     <div class="my-info">
-                        <h1>Мої товари (Seller-name)</h1>
+                        <h1>Мої товари ({{$seller->first()->company_name}})</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
                         <p style="margin: 0">Всього товарів: ххх</p>
                         <div class="d-flex align-items-center" style="margin-bottom: 50px">
