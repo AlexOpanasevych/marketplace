@@ -1,5 +1,5 @@
 <header class="d-flex align-items-center justify-content-between">
-    <a href="{{route('home')}}"><p style='font-size: 24px'>Logo+name</p></a>
+    <a href="{{route('home')}}"><img style="height: 60px" src="{{asset('img/logo.svg')}}"></a>
     <div id="catalog">
         <button class="categories_popup_btn">Каталог товарів</button>
         <div class="categories_popup_fade">
