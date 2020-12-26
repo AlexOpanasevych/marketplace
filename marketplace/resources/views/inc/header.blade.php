@@ -15,9 +15,9 @@
         <input type="submit" value="Найти">
     </div>
     <div id=header_buttons>
-        <a href="{{route('chosen')}}"><img src="img/favorites.svg"></a>
-        <a href="{{route('cart')}}"><img src="img/cart.svg"></a>
-        <a href="{{route('info')}}"><img src="img/profile.svg"></a>
+        <a href="{{route('chosen')}}"><img src="{{asset('img/favorites.svg')}}"></a>
+        <a href="{{route('cart')}}"><img src="{{asset('img/cart.svg')}}"></a>
+        <a href="{{route('info')}}"><img src="{{asset('img/profile.svg')}}"></a>
     </div>
 </header>
 
