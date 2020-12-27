@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,4 +38,35 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+<<<<<<< Updated upstream
+=======
+
+    public function chosen() {
+        return $this->hasMany(Chosen::class);
+    }
+
+    public function address() {
+        return $this->hasOne(Address::class);
+    }
+
+    public function permission() {
+        return $this->hasOne(Permission::class);
+    }
+
+    public function seller() {
+        return $this->belongsTo(Seller::class);
+    }
+
+    public function feedback() {
+        return $this->hasMany(Feedback::class);
+    }
+
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
+
+    public function cart() {
+        return $this->hasOne(Cart::class);
+    }
+>>>>>>> Stashed changes
 }
