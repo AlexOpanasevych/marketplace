@@ -63,7 +63,7 @@ header #catalog .categories_popup_fade .categories_popup{
     position: fixed;
     top: 85px;
     padding: 20px;
-    width: 985px;
+    width: 860px;
     background: #fff;
     border-radius: 5px;
     z-index: 10;
@@ -72,11 +72,11 @@ header #catalog .categories_popup_fade .categories_popup{
 
 header #catalog .categories_popup_fade .categories_popup:before{
     content: ' ';
-    position: fixed;
+    position: relative;
     width: 0;
     height: 0;
-    left: 400px;
-    top: 60px;
+    left: 70px;
+    bottom: 50px;
     border: 13px solid;
     border-color: transparent transparent  #fff;
 }
@@ -566,3 +566,34 @@ main #shopping_bottom_block .shopping_buttons .shopping_catalog_and_buy_buttons:
 }
 
 /* cart page */
+
+/* footer */
+footer{
+    background-color: #052539;
+    height: 100px;
+    width: 100%;
+    padding: 0 200px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+}
+
+footer .icons{
+    display: flex;
+    flex-flow: row;
+}
+
+footer .icons img{
+    height: 55px;
+    width: 55px;
+    padding-left: 20px;
+}
+
+footer .text{
+    display: flex;
+    flex-flow: column;
+}
+/* footer */
