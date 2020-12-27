@@ -23,13 +23,13 @@ Route::get('/', function () {
 
 
 Route::get('/my-account', function () {
-        $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+        $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
         return view('my_account_info', ['seller' => $seller]);
 })->name('info')->middleware('auth');
 
 
 Route::get('/my-account/address', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_address', ['seller' => $seller]);
 })->name('address')->middleware('auth');;
 
@@ -57,7 +57,7 @@ Route::post('/registration', [RegistrationController::class, 'store'])->name('re
 
 
 Route::get('/my-account/feedback', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_feedback', ['seller' => $seller]);
 })->name('feedback')->middleware('auth');
 
@@ -65,36 +65,36 @@ Route::get('/my-account/feedback', function () {
 Route::get('/my-account/become-seller', function () {
 
     return view('my_account_seller', [
-        'seller' => Seller::where('user_id', '=', Auth::user()->id),
+        'seller' => Seller::where('user_id', '=', Auth::user()->id)->get()->first(),
     ]);
 })->name('seller');
 Route::post('/my-account/become-seller', [SessionController::class, 'becomeSeller'])->name('seller');
 
 
 Route::get('/my-account/chosen', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_chosen', ['seller' => $seller]);
 })->name('chosen');
 
 Route::get('/my-account/my-orders', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_orders', ['seller' => $seller]);
 })->name('orders')->middleware('auth');
 
 Route::get('/my-account/my-items', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_seller_items', ['seller' => $seller]);
 })->name('items')->middleware('auth');
 
 
 Route::get('/my-account/my-statistics', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_statistics', ['seller' => $seller]);
 })->name('statistics')->middleware('auth');
 
 
 Route::get('/my-account/my-items-order', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_seller_orders', ['seller' => $seller]);
 })->name('iorder')->middleware('auth');
 
