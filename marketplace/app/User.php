@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'name', 'lastname', 'patronymic', 'phone'
     ];
 
     /**
@@ -38,8 +38,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-<<<<<<< Updated upstream
-=======
 
     public function chosen() {
         return $this->hasMany(Chosen::class);
@@ -68,5 +66,4 @@ class User extends Authenticatable
     public function cart() {
         return $this->hasOne(Cart::class);
     }
->>>>>>> Stashed changes
 }
