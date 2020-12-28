@@ -7,14 +7,14 @@
         <h1 style="color: black">Особистий кабінет</h1>
         <div class="row">
             <div class="col-md-3 account-menu">
-                @include('inc.my-account-menu')
+                @include('inc.my-account-menu', ['seller' => $seller])
             </div>
             <div class="col-md-9 left-part">
                 <div class="account-content">
                     <div class="my-info">
                         <h1>Моя інформація</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
-                        <form class="d-flex flex-column" action="" method="POST">
+                        <form class="d-flex flex-column" action="{{url()->current()}}/change-user-data" method="POST">
                             @csrf
                             <h3>Введіть особисті данні:</h3>
                             <label>
@@ -59,7 +59,7 @@
                                 <button type="submit">Змінити</button>
                             </div>
                         </form>
-                        <form class="d-flex flex-column" action="" method="POST">
+                        <form class="d-flex flex-column" action="{{url()->current()}}/change-contacts" method="POST">
                             @csrf
                             <h3>Змініть свої контакти:</h3>
                             <label>

@@ -20,13 +20,13 @@
 
 <div class="d-flex flex-column justify-content-center account-greeting">
     <p style="margin-bottom: 5px">Вітаю,</p>
-{{--    <p class = "account-username">@if(auth()->check()) {{auth()->user()->name}} @endif</p>--}}
-    <p class = "account-username">user-email</p>
+    <p class = "account-username">@if(auth()->check()) {{auth()->user()->name}} @endif</p>
+    <p class = "account-username">@if(auth()->check()) {{auth()->user()->email}} @endif</p>
 </div>
 
 {{-- Коли користувачі будуть ділитись на клієнтів і продавців ДОБАВИТИ IF --}}
 {{--  Если не продавец  --}}
-{{--
+@if(!isset($seller))
     @foreach($pages_user as $page_name => $page_url)
         @if(\Illuminate\Support\Facades\Request::path() == $page_url)
             <a class="account-current-button hide-button"><div class="d-flex align-items-center">{{$page_name}}</div></a>
@@ -37,10 +37,8 @@
                 <a href="/{{$page_url}}" class="hide-button"><div class="d-flex align-items-center">{{$page_name}}</div></a>
             @endif
         @endif
-    @endforeach--}}
-
-{{--  Если продавец  --}}
-
+    @endforeach
+@else
 @foreach($pages_seller as $page_name => $page_url)
     @if(\Illuminate\Support\Facades\Request::path() == $page_url)
         <a class="account-current-button hide-button"><div class="d-flex align-items-center">{{$page_name}}</div></a>
@@ -52,3 +50,4 @@
         @endif
     @endif
 @endforeach
+@endif

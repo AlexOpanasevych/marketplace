@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $product_list = \App\Models\Product::all();
+    return view('welcome', ['product_list' => $product_list]);
 })->name('home');
 
 
