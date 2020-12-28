@@ -6,7 +6,7 @@
     <main style="min-height: 100vh">
         <div class="delivery" style="margin-top: 50px;">
             <h1>Введіть інформацію про товар:</h1>
-            <form class="order_info">
+            <form class="order_info" method="post" action="{{route('add-product')}}">
                 <div class="delivery_info">
                     <input type="text" name="product_name" placeholder="Назва товару" required>
                     <input type="text" name="product_quantity" placeholder="Кількість товару" required>
@@ -21,9 +21,9 @@
                     <input type="file" name="product_photo" id="file" style="display:none" required>
                     <select name="product_category" required>
                         <option disabled selected>Оберіть категорію</option>
-                        <option>category1</option>
-                        <option>category2</option>
-                        <option>category3</option>
+                        @foreach($category_list as $category)
+                            <option>{{$category->category_name}}</option>
+                        @endforeach
                     </select>
                     <button type="submit" name="confirm_delivery">Оформити замовлення</button>
                 </div>

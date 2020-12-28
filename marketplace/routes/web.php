@@ -121,13 +121,16 @@ Route::get('/my-account/my-items', function () {
 
     return view('my_account_seller_items', [
         'seller' => $seller,
-        'seller_products' => $seller_products
+        'seller_products' => $seller_products,
         'category_list' => $category_list
     ]);
 })->name('items')->middleware('auth');
 
 Route::get('/add-product', function () {
-    return view('add_product');
+
+    $category_list = \App\Models\Category::all();
+
+    return view('add_product', ['category_list' => $category_list]);
 })->name('add-product');
 
 Route::get('/remove-product/{id}', function ($id) {
@@ -184,3 +187,39 @@ Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name
 
 Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFromChosen'])->name('remove-chosen');
 Route::get('/my-account/chosen/add/{id}', [ChosenController::class, 'addToChosen'])->name('add-chosen');
+
+
+Route::post('/add-product', function (\Illuminate\Support\Facades\Request $request) {
+
+
+    $product_name = $request->product_name;
+    $product_exists = Product::where('product_name', '=', $product_name);
+    if(!isset($product_exists)) {
+        $product_quantity = $request->product_quantity;
+        $product_price = $request->product_price;
+        $product_descripton = $request->product_descripton;
+        $product_photo = $request->product_photo;
+        $product_category = $request->product_category;
+
+        $category = \App\Models\Category::where('category_name', '=', $product_category);
+
+        $seller = Seller::where('user_id', '=', Auth::user()->id);
+
+        $product = new Product();
+        $product->quantity = $product_quantity;
+        $product->price = $product_price;
+        $product->description = $product_descripton;
+        $product->photo_path = $product_photo;
+        $product->category_id = $category->id;
+        $product->seller_id = $seller->id;
+        $product->save();
+
+        return back();
+
+    }
+    else {
+        return back()->withErrors([
+            'product.exists' => 'Продукт з заданим ім\'ям існує',
+        ]);
+    }
+})->name('add-product');
