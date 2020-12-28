@@ -597,3 +597,314 @@ footer .text{
     flex-flow: column;
 }
 /* footer */
+
+/* order_confirm page */
+main .delivery{
+    display: flex;
+    flex-flow: column;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 858px;
+    margin: 30px 315px;
+    padding: 35px;
+}
+
+main .delivery h1{
+    font-size: 24px;
+    padding-bottom: 25px
+}
+
+main .delivery .order_info p{
+    font-size: 20px;
+    padding-bottom: 15px
+}
+
+main .delivery .order_info .delivery_info{
+    display: flex;
+    flex-flow: row;
+    padding-bottom: 15px
+}
+
+main .delivery .order_info .delivery_info input{
+    font-size: 18px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+    height: 45px;
+    margin-right: 35px;
+}
+
+main .delivery .order_info .delivery_info input:focus{
+    background-color: rgba(79, 124, 172, 0.2);
+    outline: none;
+}
+
+main .delivery .order_info .delivery_info button{
+    border-radius: 10px;
+    height: 45px;
+    outline: none;
+    border: none;
+    background-color: #499F68;
+    width: 225px;
+    color: #fff;
+    font-size: 18px;
+}
+
+main .delivery .order_info .delivery_info button:hover{
+    box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+/* order_confirm page */
+
+/* add_product page */
+main .delivery .order_info .delivery_info textarea{
+    font-size: 20px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+    height: 115px;
+    width: 835px;
+    margin-right: 35px;
+    padding: 10px 10px;
+    resize: none;
+}
+
+main .delivery .order_info .delivery_info textarea:focus{
+    background-color: rgba(79, 124, 172, 0.2);
+    outline: none;
+}
+
+main .delivery .order_info .delivery_info input[type=button]{
+    font-size: 20px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-left: 10px;
+    text-align: center;
+    height: 45px;
+    margin-right: 35px;
+    padding-left: 0;
+    width: 225px;
+    background-color: rgba(79, 124, 172, 0.2);
+}
+
+main .delivery .order_info .delivery_info input[type=button]:hover{
+    box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
+    outline: none;
+}
+
+main .delivery .order_info .delivery_info input[type=button]:focus{
+    outline: none;
+}
+
+main .delivery .order_info .delivery_info select, option{
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+    height: 45px;
+    width: 225px;
+    padding-left: 10px;
+    margin-right: 35px;
+    font-size: 20px;
+}
+
+main .delivery .order_info .delivery_info select:hover{
+    outline: none;
+}
+
+main .delivery .order_info .delivery_info select:focus{
+    outline: none;
+}
+
+/* add_product page */
+
+/* product page */
+
+main .product_block{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 30px 150px;
+}
+
+main .product_block .product_photo{
+    width: 550px;
+}
+
+main .product_block .product_photo img{
+    height: 500px;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+main .product_block .product_info{
+    padding-top: 25px;
+    width: 700px;
+    display: flex;
+    flex-flow: column;
+}
+
+main .product_block .product_info .product_name{
+    font-size: 30px;
+    margin-bottom: 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 25px;
+}
+
+main .product_block .product_info .buy_product{
+    display: flex;
+    flex-flow: row;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 25px;
+    padding: 10px 25px;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+main .product_block .product_info .buy_product .add_product_to_cart{
+    margin: 0 25px;
+    width: 125px;
+    height: 40px;
+    background-color: #499F68;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+main .product_block .product_info .buy_product .add_product_to_cart:hover{
+    box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+main .product_block .product_info .buy_product .favourite_icon{
+    width: 40px;
+    margin-top: 3px;
+}
+
+main .product_block .product_info .buy_product .favourite_icon path{
+    fill: transparent;
+    stroke-width: 20;
+    stroke: #4F7CAC;
+    stroke-dasharray: 1460;
+    stroke-dashoffset: 0;
+}
+
+main .product_block .product_info .buy_product .favourite_icon:hover path{
+    animation: animate-heart 0.4s linear forwards;
+    cursor: pointer;
+}
+
+@keyframes animate-heart{
+
+    40%{
+        stroke-dashoffset: 1460;
+    }
+
+    80%{
+        stroke-dashoffset: 2920;
+        fill: transparent;
+    }
+
+    100%{
+        stroke-dashoffset: 2920;
+        fill: #4F7CAC;
+    }
+}
+
+main .product_block .product_info h1{
+    font-size: 30px;
+    margin-bottom: 20px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 15px 25px;
+    margin-bottom: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+main .product_block .product_info .product_description{
+    display: flex;
+    flex-flow: column;
+    word-wrap: break-word;
+    padding: 15px 25px;
+    border: 1px solid #ccc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 35px;
+}
+
+
+main .product_block .product_info .product_coments{
+    display: flex;
+    flex-flow: column;
+    width: 700px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 15px 25px;
+}
+
+main .product_block .product_info .product_coments .add_coment{
+    display: flex;
+    flex-flow: row;
+    padding: 10px 0;
+}
+
+main .product_block .product_info .product_coments .add_coment textarea{
+    width: 500px;
+    height: 60px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 8px 10px;
+    font-size: 18px;
+    resize: none;
+}
+
+main .product_block .product_info .product_coments .add_coment textarea:focus{
+    outline: none;
+    background-color: rgba(79, 124, 172, 0.2)
+}
+
+main .product_block .product_info .product_coments .add_coment button{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    background-color: #499F68;
+    color: #fff;
+    width: 150px;
+    height: 60px;
+    font-size: 18px;
+}
+
+main .product_block .product_info .product_coments .add_coment button:hover{
+    box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+main .product_block .product_info .product_description h3{
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+main .product_block .product_info .product_description p{
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+/* product page */
