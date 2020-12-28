@@ -1,17 +1,17 @@
 <div class="account-order-list d-flex flex-column" style="margin-bottom: 20px">
     <small class="text-muted">
-        Номер заказа: №ххх
+        Номер заказа: {{$order_info->ordered_number}}
     </small>
     <small class="text-muted">
-        Статус замовлення: СТАТУС
+        Статус замовлення: {{$order_info->status}}
     </small>
     <small class="text-muted">
-        Дата замовлення: 00:00 01/01/2020
+        Дата замовлення: {{$order_info->created_at}}
     </small>
 </div>
 <div class="row wow fadeIn card-deck">
 
-    @foreach([1,2,3,4,5] as $j)
+    @foreach($order_info->items as $j)
         <div class="col-lg-3 d-flex align-items-stretch" style="">
             @include('inc.my-account-order-item')
         </div>

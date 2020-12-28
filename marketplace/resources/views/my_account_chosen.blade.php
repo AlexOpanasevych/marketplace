@@ -15,9 +15,9 @@
                         <h1>Обране</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
                         <div class="row wow fadeIn card-deck">
-                        @foreach([1,2,3,4,5,6] as $i)
+                        @foreach($chosen_list as $i)
                                 <div class="col-lg-4 d-flex align-items-stretch" style="">
-                                    @include('inc.my-account-item')
+                                    @include('inc.my-account-item', ['item' => $i])
                                 </div>
                             @endforeach
 
