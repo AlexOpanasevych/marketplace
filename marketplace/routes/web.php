@@ -30,15 +30,16 @@ Route::get('/', function () {
 
 
 Route::get('/my-account', function () {
-
-        $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-        return view('my_account_info', ['seller' => $seller]);
+    $category_list = \App\Models\Category::all();
+    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
+    return view('my_account_info', ['seller' => $seller, 'category_list' => $category_list]);
 })->name('info')->middleware('auth');
 
 
 Route::get('/my-account/address', function () {
+    $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_address', ['seller' => $seller]);
+    return view('my_account_address', ['seller' => $seller, 'category_list' => $category_list]);
 })->name('address')->middleware('auth');;
 
 
@@ -65,21 +66,24 @@ Route::post('/registration', [RegistrationController::class, 'store'])->name('re
 
 
 Route::get('/my-account/feedback', function () {
+    $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_feedback', ['seller' => $seller]);
+    return view('my_account_feedback', ['seller' => $seller, 'category_list' => $category_list]);
 })->name('feedback')->middleware('auth');
 
 
 Route::get('/my-account/become-seller', function () {
-
+    $category_list = \App\Models\Category::all();
     return view('my_account_seller', [
         'seller' => Seller::where('user_id', '=', Auth::user()->id)->get()->first(),
+        'category_list' => $category_list
     ]);
 })->name('seller');
 Route::post('/my-account/become-seller', [SessionController::class, 'becomeSeller'])->name('seller');
 
 
 Route::get('/my-account/chosen', function () {
+    $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
 
     $chosen_list = Chosen::where('user_id', '=', Auth::user()->id);
@@ -87,13 +91,13 @@ Route::get('/my-account/chosen', function () {
     return view('my_account_chosen', [
         'seller' => $seller,
         'chosen_list' => $chosen_list,
-
+        'category_list' => $category_list
     ]);
 })->name('chosen');
 
 Route::get('/my-account/my-orders', function () {
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-
+    $category_list = \App\Models\Category::all();
     $orders = Order::where('user_id', '=', Auth::user()->id)->get();
     $orderedProductsList = [];
     foreach ($orders as $order) {
@@ -105,31 +109,34 @@ Route::get('/my-account/my-orders', function () {
 
     return view('my_account_orders', [
         'seller' => $seller,
-        'orders_list' => $orderedProductsList]);
+        'orders_list' => $orderedProductsList,
+        'category_list' => $category_list]);
 })->name('orders')->middleware('auth');
 
 Route::get('/my-account/my-items', function () {
-
+    $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_seller_items', ['seller' => $seller]);
+    return view('my_account_seller_items', ['seller' => $seller, 'category_list' => $category_list]);
 })->name('items')->middleware('auth');
 
 
 Route::get('/my-account/my-statistics', function () {
+    $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_statistics', ['seller' => $seller]);
+    return view('my_account_statistics', ['seller' => $seller, 'category_list' => $category_list]);
 })->name('statistics')->middleware('auth');
 
 
 Route::get('/my-account/my-items-order', function () {
-
+    $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_seller_orders', ['seller' => $seller]);
+    return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list]);
 })->name('iorder')->middleware('auth');
 
 
 Route::get('/cart', function () {
-    return view('cart');
+    $category_list = \App\Models\Category::all();
+    return view('cart', ['category_list' => $category_list]);
 })->name('cart');
 
 Route::post('/my-account/change-user-data', [SessionController::class, 'changeUserData'])->name('change-udata');
