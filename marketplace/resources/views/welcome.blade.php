@@ -24,5 +24,12 @@
                     @endfor
                 @endfor
             </div>
+
+        <!-- Vendor scripts -->
+        <script src="libs/jquery/jquery-3.5.1.min.js"></script>
+        <script src="libs/owlcarousel2/owl.carousel.min.js"></script>
+
+        <!-- User scripts -->
+        <script src="js/main.js"></script>
     </main>
 @endsection
