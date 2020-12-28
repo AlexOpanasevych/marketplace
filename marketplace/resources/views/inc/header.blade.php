@@ -4,9 +4,13 @@
         <button class="categories_popup_btn">Каталог товарів</button>
         <div class="categories_popup_fade">
             <div class="categories_popup">
-                <a href="#" name="category">category1</a>
-                <a href="#" name="category">category2</a>
-                <a href="#" name="category" style="border: none">category_last</a>
+                @for($i = 0; $i < count($category_list); $i++)
+                    @if($i != count($category_list) - 1)
+                        <a href="#" name="category">{{$category_list[$i]->category_name}}</a>
+                    @else
+                        <a href="#" name="category" style="border: none">{{$category_list[$i]->category_name}}</a>
+                    @endif
+                @endfor
             </div>
         </div>
     </div>
