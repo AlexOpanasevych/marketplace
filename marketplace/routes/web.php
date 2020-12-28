@@ -25,7 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $product_list = \App\Models\Product::all();
-    return view('welcome', ['product_list' => $product_list]);
+    $category_list = \App\Models\Category::all();
+    return view('welcome', ['product_list' => $product_list, 'category_list' => $category_list]);
 })->name('home');
 
 
