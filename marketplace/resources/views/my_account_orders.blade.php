@@ -14,7 +14,7 @@
                     <div class="my-info">
                         <h1>Мої замовлення</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
-                        <p>Всього замовлень: {{$orders_list->count()}}</p>
+                        <p>Всього замовлень: {{count($orders_list)}}</p>
                         @foreach($orders_list as $order)
                             @include('inc.my-account-order', ['order_info' => $order])
                         @endforeach
