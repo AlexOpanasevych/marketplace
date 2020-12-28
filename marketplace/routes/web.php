@@ -7,6 +7,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
 use App\Models\Order;
 use App\Models\OrderedProduct;
+use App\Models\Product;
 use App\Seller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -110,9 +111,32 @@ Route::get('/my-account/my-orders', function () {
 Route::get('/my-account/my-items', function () {
 
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_seller_items', ['seller' => $seller]);
+
+    $seller_products = Product::where('seller_id', '=', $seller->id)->get();
+
+    return view('my_account_seller_items', [
+        'seller' => $seller,
+        'seller_products' => $seller_products
+    ]);
 })->name('items')->middleware('auth');
 
+Route::get('/add-product', function () {
+    return view('add_product');
+})->name('add-product');
+
+Route::get('/remove-product/{id}', function ($id) {
+
+    Product::destroy($id);
+
+
+    return back();
+})->name('remove-product');
+
+Route::get('/product/{id}', function ($id) {
+    return view('product', [
+        'product' => Product::find($id),
+    ]);
+})->name('product');
 
 Route::get('/my-account/my-statistics', function () {
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
