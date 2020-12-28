@@ -6,98 +6,23 @@
     <main>
 
             <div class="products">
-                <div class="product">
+                @for($j = 0; $j < 10; $j++)
+                    @for($i = 0; $i < count($product_list); $i++)
+                    <div class="product">
 
-                    <div class="add_product_to">
-                        <div class="fav_icon"></div>
-                    </div>
-                    <img src="img/5a3a540e634e59.16223150151377204640685054.png" class="product_icon">
-                    <div class="add_product_to" style="margin-top: 47px">
-                        <div class="cart_icon">
+                        <div class="add_product_to">
+                            <div class="fav_icon"></div>
                         </div>
-                    </div>
-                    <p class="product_name">унитаз.пнг</p>
-                    <p class="product_price">123 &#8372;</p>
-                </div>
-                <div class="product">
-
-                    <div class="add_product_to">
-                        <div class="fav_icon"></div>
-                    </div>
-                    <img src="img/5a3a540e634e59.16223150151377204640685054.png" class="product_icon">
-                    <div class="add_product_to" style="margin-top: 47px">
-                        <div class="cart_icon">
+                        <img src="{{asset('img/products/'.$product_list[$i]->photo_path)}}" class="product_icon">
+                        <div class="add_product_to" style="margin-top: 47px">
+                            <div class="cart_icon">
+                            </div>
                         </div>
+                        <p class="product_name">{{$product_list[$i]->product_name}}</p>
+                        <p class="product_price">{{$product_list[$i]->price}} &#8372;</p>
                     </div>
-                    <p class="product_name">унитаз.пнг</p>
-                    <p class="product_price">123 &#8372;</p>
-                </div>
-                <div class="product">
-
-                    <div class="add_product_to">
-                        <div class="fav_icon"></div>
-                    </div>
-                    <img src="img/5a3a540e634e59.16223150151377204640685054.png" class="product_icon">
-                    <div class="add_product_to" style="margin-top: 47px">
-                        <div class="cart_icon">
-                        </div>
-                    </div>
-                    <p class="product_name">унитаз.пнг</p>
-                    <p class="product_price">123 &#8372;</p>
-                </div>
-                <div class="product">
-
-                    <div class="add_product_to">
-                        <div class="fav_icon"></div>
-                    </div>
-                    <img src="img/5a3a540e634e59.16223150151377204640685054.png" class="product_icon">
-                    <div class="add_product_to" style="margin-top: 47px">
-                        <div class="cart_icon">
-                        </div>
-                    </div>
-                    <p class="product_name">унитаз.пнг</p>
-                    <p class="product_price">123 &#8372;</p>
-                </div>
-                <div class="product">
-
-                    <div class="add_product_to">
-                        <div class="fav_icon"></div>
-                    </div>
-                    <img src="img/5a3a540e634e59.16223150151377204640685054.png" class="product_icon">
-                    <div class="add_product_to" style="margin-top: 47px">
-                        <div class="cart_icon">
-                        </div>
-                    </div>
-                    <p class="product_name">унитаз.пнг</p>
-                    <p class="product_price">123 &#8372;</p>
-                </div>
-                <div class="product">
-
-                    <div class="add_product_to">
-                        <div class="fav_icon"></div>
-                    </div>
-                    <img src="img/5a3a540e634e59.16223150151377204640685054.png" class="product_icon">
-                    <div class="add_product_to" style="margin-top: 47px">
-                        <div class="cart_icon">
-                        </div>
-                    </div>
-                    <p class="product_name">унитаз.пнг</p>
-                    <p class="product_price">123 &#8372;</p>
-                </div>
-                <div class="product">
-
-                    <div class="add_product_to">
-                        <div class="fav_icon"></div>
-                    </div>
-                    <img src="img/5a3a540e634e59.16223150151377204640685054.png" class="product_icon">
-                    <div class="add_product_to" style="margin-top: 47px">
-                        <div class="cart_icon">
-                        </div>
-                    </div>
-                    <p class="product_name">унитаз.пнг</p>
-                    <p class="product_price">123 &#8372;</p>
-                </div>
+                    @endfor
+                @endfor
             </div>
-
     </main>
 @endsection

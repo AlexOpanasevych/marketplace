@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $product_list = \App\Models\Product::all();
+    return view('welcome', ['product_list' => $product_list]);
 })->name('home');
 
 
 Route::get('/my-account', function () {
+
         $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
         return view('my_account_info', ['seller' => $seller]);
 })->name('info')->middleware('auth');
@@ -82,6 +84,7 @@ Route::get('/my-account/my-orders', function () {
 })->name('orders')->middleware('auth');
 
 Route::get('/my-account/my-items', function () {
+
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_seller_items', ['seller' => $seller]);
 })->name('items')->middleware('auth');
@@ -94,6 +97,7 @@ Route::get('/my-account/my-statistics', function () {
 
 
 Route::get('/my-account/my-items-order', function () {
+
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_seller_orders', ['seller' => $seller]);
 })->name('iorder')->middleware('auth');

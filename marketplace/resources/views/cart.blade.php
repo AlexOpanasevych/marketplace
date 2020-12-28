@@ -4,7 +4,7 @@
 
 @section('page-content')
     <main>
-        <h1 class="num_of_products">Всьго товарів: num</h1>
+        <h1 class="num_of_products">Всього товарів: num</h1>
         <div class="shopping_horizontal_line_up"></div>
         <div class="owl-carousel owl-theme">
             <div id="shopping_items">

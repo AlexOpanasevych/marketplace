@@ -62,9 +62,7 @@
 @endforeach
 @endif
 
-
 {{--  Если суперюзер  --}}
-{{--
 
 @foreach($pages_super as $page_name => $page_url)
     @if(\Illuminate\Support\Facades\Request::path() == $page_url)
@@ -77,9 +75,3 @@
         @endif
     @endif
 @endforeach
-
---}}
-
-
-
-
