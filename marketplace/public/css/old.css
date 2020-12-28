@@ -347,6 +347,25 @@ body{
     padding-left: 20px;
 }
 
+@media (min-width: 992px) {
+    .sidenav {
+        width: 300px;
+        height: 100vh;
+        padding-top: 110px;
+        padding-left: 150px;
+        background: #052539;
+    }
+
+    .navbar-expand-lg .sidenav {
+        flex-direction: column;
+    }
+
+    .content-wrapper {
+        padding-top: 100px;
+        margin-left: 400px;
+        margin-right: 150px;
+    }
+}
 
 @media (min-width: 992px) {
     .sidenav {
@@ -368,4 +387,7 @@ body{
     }
 }
 
-
+.super-button{
+    background-color: #052539 !important;
+    color: white !important;
+}
