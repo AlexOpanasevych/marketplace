@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('patronymic')->default('NULL');
             $table->string('phone')->default('NULL');
+            $table->boolean('is_superuser')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

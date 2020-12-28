@@ -1,5 +1,5 @@
 @php
-    
+
 	$pages_user = ['Моя інформація'=>'my-account',
     'Моя адреса'=>'my-account/address',
     'Мої замовлення'=>'my-account/my-orders',
@@ -25,7 +25,7 @@
     'Відгуки про сайт'=>'my-account/feedback',
     'Сторінка супер-користувача'=>'superuser-main',
     'Вийти'=>'logout']
-	
+
 @endphp
 
 <div class="d-flex flex-column justify-content-center account-greeting">
@@ -63,7 +63,7 @@
 @endif
 
 {{--  Если суперюзер  --}}
-
+@if(Auth::user()->is_superuser)
 @foreach($pages_super as $page_name => $page_url)
     @if(\Illuminate\Support\Facades\Request::path() == $page_url)
         <a class="account-current-button hide-button"><div class="d-flex align-items-center">{{$page_name}}</div></a>
@@ -75,3 +75,4 @@
         @endif
     @endif
 @endforeach
+@endif

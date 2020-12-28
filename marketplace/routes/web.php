@@ -1,7 +1,12 @@
 <?php
 
+use App\Chosen;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChosenController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
+use App\Models\Order;
+use App\Models\OrderedProduct;
 use App\Seller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -76,12 +81,31 @@ Route::post('/my-account/become-seller', [SessionController::class, 'becomeSelle
 
 Route::get('/my-account/chosen', function () {
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_chosen', ['seller' => $seller]);
+
+    $chosen_list = Chosen::where('user_id', '=', Auth::user()->id);
+
+    return view('my_account_chosen', [
+        'seller' => $seller,
+        'chosen_list' => $chosen_list,
+
+    ]);
 })->name('chosen');
 
 Route::get('/my-account/my-orders', function () {
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_orders', ['seller' => $seller]);
+
+    $orders = Order::where('user_id', '=', Auth::user()->id)->get();
+    $orderedProductsList = [];
+    foreach ($orders as $order) {
+        $orderedProducts = OrderedProduct::leftJoin('orders', function ($join) use ($order) {
+            $join->on('ordered_product.order_id', '=', $order->id);
+        })->where('order_id', '=', $order->id)->get();
+        array_push($orderedProductsList, $orderedProducts);
+    }
+
+    return view('my_account_orders', [
+        'seller' => $seller,
+        'orders_list' => $orderedProductsList]);
 })->name('orders')->middleware('auth');
 
 Route::get('/my-account/my-items', function () {
@@ -123,3 +147,9 @@ Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('p
 
 Route::post('/my-account/address', [SessionController::class, 'changeAddress'])->name('address');
 Route::post('/my-account/email', [SessionController::class, 'sendFeedback'])->name('feedback');
+
+Route::get('/cart/add/{id}', [CartController::class, 'addToCart'])->name('add-cart');
+Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('remove-cart');
+
+Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFromChosen'])->name('remove-chosen');
+Route::get('/my-account/chosen/add/{id}', [ChosenController::class, 'addToChosen'])->name('add-chosen');
