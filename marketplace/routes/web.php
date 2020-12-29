@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChosenController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderedProduct;
 use App\Models\Product;
@@ -130,6 +131,7 @@ Route::get('/add-product', function () {
 
     $category_list = \App\Models\Category::all();
 
+
     return view('add_product', ['category_list' => $category_list]);
 })->name('add-product');
 
@@ -157,7 +159,18 @@ Route::get('/my-account/my-statistics', function () {
 Route::get('/my-account/my-items-order', function () {
     $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list]);
+
+    $seller_products = Product::where('seller_id', '=', $seller->id)->leftJoin('ordered_products', 'products.id', '=', 'ordered_products.id')->get();
+//    foreach($seller_products as $product) {
+//        $order_number += $product->ordered_number;
+//    }
+    $orders = Order::leftJoin('users', function($join) {
+        $join->on('users.id', '=', 'orders.user_id');
+    })->get();
+    if(!empty($orders)) {
+        $orders = $orders->whereIn('id', '=', $seller_products->values('order_id'));
+    }
+    return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list, 'seller_products' => $seller_products, 'orders' => $orders]);
 })->name('iorder')->middleware('auth');
 
 
@@ -223,3 +236,11 @@ Route::post('/add-product', function (\Illuminate\Support\Facades\Request $reque
         ]);
     }
 })->name('add-product');
+
+
+Route::get('/superuser-main', function () {
+
+    return view('superuser.superuser_main', [
+        'category_list' => \App\Models\Category::all(),
+    ]);
+});
