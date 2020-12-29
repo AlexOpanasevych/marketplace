@@ -32,7 +32,7 @@
 
     <main style="padding-top: 70px; min-height: 100vh; margin-bottom: 100px" class="content-wrapper">
         <h1 style="margin-bottom: 30px">Останні замовлення</h1>
-        @foreach([1,2,3,1 ,1, 1, 1, 1, 1, 2,2,2,2 ] as $i)
+        @foreach($orders as $i)
             @if($loop -> first)
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid; border-top: silver 2px solid">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">

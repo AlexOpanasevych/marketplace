@@ -50,7 +50,7 @@ class User extends Authenticatable
     public function permission() {
         return $this->hasOne(Permission::class);
     }
-  
+
     public function seller() {
         return $this->belongsTo(Seller::class);
     }
@@ -65,5 +65,9 @@ class User extends Authenticatable
 
     public function cart() {
         return $this->hasOne(Cart::class);
+    }
+
+    public function sellerRequest() {
+        return $this->hasOne(SellerRequest::class);
     }
 }

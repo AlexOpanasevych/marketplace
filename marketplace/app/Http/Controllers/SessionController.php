@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Address;
 use App\Feedback;
 use App\Seller;
+use App\SellerRequest;
 use App\User;
 use Illuminate\Auth\Recaller;
 use Illuminate\Http\Request;
@@ -228,7 +229,7 @@ class SessionController extends Controller
     public function becomeSeller(Request $request)
     {
         if(Auth::check()) {
-            $seller = new Seller();
+            $seller = new SellerRequest();
             $seller->company_name = $request->name;
             $seller->user_id = Auth::user()->id;
             $seller->save();

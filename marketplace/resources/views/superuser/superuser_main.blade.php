@@ -32,10 +32,10 @@
 
     <main style="padding-top: 70px; min-height: 100vh" class="content-wrapper">
         <h1 style="margin-bottom: 30px">Головна сторінка</h1>
-        <p>Кількість користувачів: <b>xxxxx</b> </p>
-        <p>Кількість продавців: <b>xxxxx</b></p>
-        <p>Кількість замовлень: <b>xxxxx</b></p>
-        <p>Кількість товарів: <b>xxxxx</b></p>
-        <p>Сумарний прибуток за усі замовлення: <b>xxxxx</b></p>
+        <p>Кількість користувачів: <b>{{$user_count}}</b> </p>
+        <p>Кількість продавців: <b>{{$seller_count}}</b></p>
+        <p>Кількість замовлень: <b>{{$order_count}}</b></p>
+        <p>Кількість товарів: <b>{{$products_count}}</b></p>
+        <p>Сумарний прибуток за усі замовлення: <b>{{$sum_orders}}</b></p>
     </main>
 @endsection

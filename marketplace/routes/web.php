@@ -240,7 +240,78 @@ Route::post('/add-product', function (\Illuminate\Support\Facades\Request $reque
 
 Route::get('/superuser-main', function () {
 
+    $orders = Order::all();
+    $sum  = 0;
+    foreach ($orders as $order) {
+        $ordered_products = $order->ordered_product();
+        foreach ($ordered_products as $ordered_product) {
+            $products = $ordered_product->product();
+            foreach ($products as $product) {
+                $sum += $product->price;
+            }
+        }
+    }
+
     return view('superuser.superuser_main', [
         'category_list' => \App\Models\Category::all(),
+        'user_count' => \App\User::all()->count(),
+        'seller_count' => Seller::all()->count(),
+        'order_count' => Order::all()->count(),
+        'products_count' => Product::all()->count(),
+        'sum_orders' => $sum
     ]);
 });
+
+Route::get('/superuser-requests', function () {
+   return view('superuser.superuser_seller_requests', [
+       'category_list' => \App\Models\Category::all(),
+       'requests' => \App\SellerRequest::all(),
+   ]);
+});
+
+Route::get('/superuser-items', function () {
+    return view('superuser.superuser_all_items', [
+        'category_list' => \App\Models\Category::all(),
+        'products' => Product::all(),
+    ]);
+});
+
+Route::get('/superuser-users', function () {
+    return view('superuser.superuser_all_users', [
+        'category_list' => \App\Models\Category::all(),
+        'users' => \App\User::all(),
+    ]);
+});
+
+Route::get('/remove-user/{id}', function ($id) {
+    if(Auth::user()->id !== $id) {
+        \App\User::destroy($id);
+    }
+        return back();
+})->name('remove-user');
+
+Route::get('/block-user/{id}', function ($id) {
+
+    if(Auth::user()->id !== $id) {
+
+    }
+
+    return back();
+})->name('block-user');
+
+
+Route::get('/superuser-sellers', function () {
+    return view('superuser.superuser_all_sellers', [
+        'category_list' => \App\Models\Category::all(),
+        'sellers' => \App\Seller::all(),
+    ]);
+});
+
+Route::get('/superuser-orders', function () {
+    return view('superuser.superuser_all_orders', [
+        'category_list' => \App\Models\Category::all(),
+        'orders' => Order::all(),
+    ]);
+});
+
+

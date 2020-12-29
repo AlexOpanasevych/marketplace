@@ -32,26 +32,26 @@
 
     <main style="padding-top: 70px; min-height: 100vh; margin-bottom: 100px" class="content-wrapper">
         <h1 style="margin-bottom: 30px">Всі товари</h1>
-        @foreach([1,2,3,1 ,1, 1, 1, 1, 1, 2,2,2,2 ] as $i)
+        @foreach($products as $i)
             @if($loop -> first)
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid; border-top: silver 2px solid">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Товар: <a style="color: black; font-weight: bold" href="#">ххххх</a></div>
-                        <div class="col-md-4">Продавець: xxxxx</div>
+                        <div class="col-md-4">Товар: <a style="color: black; font-weight: bold" href="{{route('product', ['id' => $i->id])}}">{{$i->product_name}}</a></div>
+                        <div class="col-md-4">Продавець: {{Auth::user()->seller()->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
-                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary ">Змінити</button>
-                            <button style=" min-width: 100px" type="button" class="btn btn-danger ">Заблокувати</button>
+                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary "><a href="{{route('change-product', ['id' => $i->id])}}">Змінити</a></button>
+                            <button style=" min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('remove-product', ['id' => $i->id])}}">Заблокувати</a></button>
                         </div>
                     </div>
                 </div>
             @else
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid;">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Товар: <a style="color: black; font-weight: bold" href="#">ххххх</a></div>
-                        <div class="col-md-4">Продавець: xxxxx</div>
+                        <div class="col-md-4">Товар: <a style="color: black; font-weight: bold" href="{{route('product', ['id' => $i->id])}}">{{$i->product_name}}</a></div>
+                        <div class="col-md-4">Продавець: {{Auth::user()->seller()->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
-                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary ">Змінити</button>
-                            <button style=" min-width: 100px" type="button" class="btn btn-danger ">Заблокувати</button>
+                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary "><a href="{{route('change-product', ['id' => $i->id])}}">Змінити</a></button>
+                            <button style=" min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('remove-product', ['id' => $i->id])}}">Заблокувати</a></button>
                         </div>
                     </div>
                 </div>
