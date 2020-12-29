@@ -14,10 +14,11 @@
                     <div class="my-info">
                         <h1>Замовлення моїх товарів</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
-                        <p>Всього замовлень: ххх</p>
-                        @foreach([1,2,3] as $i)
-                            @include('inc.my-account-income-order')
-                        @endforeach
+                        <p>Всього замовлень: {{count($orders)}}</p>
+                        @for($i = 0; $i < count($orders); $i++)
+
+                            @include('inc.my-account-income-order', ['items' => $seller_products, 'order' => $orders[$i]])
+                        @endfor
 
                     </div>
                 </div>

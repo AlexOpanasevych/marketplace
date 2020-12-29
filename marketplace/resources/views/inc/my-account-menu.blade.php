@@ -48,7 +48,7 @@
             @endif
         @endif
     @endforeach
-@else
+@elseif(!Auth::user()->is_superuser && isset($seller))
 @foreach($pages_seller as $page_name => $page_url)
     @if(\Illuminate\Support\Facades\Request::path() == $page_url)
         <a class="account-current-button hide-button"><div class="d-flex align-items-center">{{$page_name}}</div></a>

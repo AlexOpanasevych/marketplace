@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChosenController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderedProduct;
 use App\Seller;
@@ -118,9 +119,36 @@ Route::get('/my-account/my-orders', function () {
 Route::get('/my-account/my-items', function () {
     $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_seller_items', ['seller' => $seller, 'category_list' => $category_list]);
+    $seller_products = Product::where('seller_id', '=', $seller->id)->get();
+
+    return view('my_account_seller_items', [
+        'seller' => $seller,
+        'seller_products' => $seller_products,
+        'category_list' => $category_list
+    ]);
 })->name('items')->middleware('auth');
 
+Route::get('/add-product', function () {
+
+    $category_list = \App\Models\Category::all();
+
+
+    return view('add_product', ['category_list' => $category_list]);
+})->name('add-product');
+
+Route::get('/remove-product/{id}', function ($id) {
+
+    Product::destroy($id);
+
+
+    return back();
+})->name('remove-product');
+
+Route::get('/product/{id}', function ($id) {
+    return view('product', [
+        'product' => Product::find($id),
+    ]);
+})->name('product');
 
 Route::get('/my-account/my-statistics', function () {
     $category_list = \App\Models\Category::all();
@@ -132,7 +160,18 @@ Route::get('/my-account/my-statistics', function () {
 Route::get('/my-account/my-items-order', function () {
     $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list]);
+
+    $seller_products = Product::where('seller_id', '=', $seller->id)->leftJoin('ordered_products', 'products.id', '=', 'ordered_products.id')->get();
+//    foreach($seller_products as $product) {
+//        $order_number += $product->ordered_number;
+//    }
+    $orders = Order::leftJoin('users', function($join) {
+        $join->on('users.id', '=', 'orders.user_id');
+    })->get();
+    if(!empty($orders)) {
+        $orders = $orders->whereIn('id', '=', $seller_products->values('order_id'));
+    }
+    return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list, 'seller_products' => $seller_products, 'orders' => $orders]);
 })->name('iorder')->middleware('auth');
 
 
@@ -189,7 +228,6 @@ Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name
 Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFromChosen'])->name('remove-chosen');
 Route::get('/my-account/chosen/add/{id}', [ChosenController::class, 'addToChosen'])->name('add-chosen');
 
-
 Route::get('/{id}', function ($id) {
     $product_list = \App\Models\Category::where('id', '=', $id)->get()->first()->product()->get();
     $category_list = \App\Models\Category::all();
@@ -201,3 +239,115 @@ Route::get('/{id}', function ($id) {
         'chosen_id' => $id,
         ]);
 })->name('home-category');
+
+Route::post('/add-product', function (\Illuminate\Support\Facades\Request $request) {
+
+
+    $product_name = $request->product_name;
+    $product_exists = Product::where('product_name', '=', $product_name);
+    if(!isset($product_exists)) {
+        $product_quantity = $request->product_quantity;
+        $product_price = $request->product_price;
+        $product_descripton = $request->product_descripton;
+        $product_photo = $request->product_photo;
+        $product_category = $request->product_category;
+
+        $category = \App\Models\Category::where('category_name', '=', $product_category);
+
+        $seller = Seller::where('user_id', '=', Auth::user()->id);
+
+        $product = new Product();
+        $product->quantity = $product_quantity;
+        $product->price = $product_price;
+        $product->description = $product_descripton;
+        $product->photo_path = $product_photo;
+        $product->category_id = $category->id;
+        $product->seller_id = $seller->id;
+        $product->save();
+
+        return back();
+
+    }
+    else {
+        return back()->withErrors([
+            'product.exists' => 'Продукт з заданим ім\'ям існує',
+        ]);
+    }
+})->name('add-product');
+
+
+Route::get('/superuser-main', function () {
+
+    $orders = Order::all();
+    $sum  = 0;
+    foreach ($orders as $order) {
+        $ordered_products = $order->ordered_product();
+        foreach ($ordered_products as $ordered_product) {
+            $products = $ordered_product->product();
+            foreach ($products as $product) {
+                $sum += $product->price;
+            }
+        }
+    }
+
+    return view('superuser.superuser_main', [
+        'category_list' => \App\Models\Category::all(),
+        'user_count' => \App\User::all()->count(),
+        'seller_count' => Seller::all()->count(),
+        'order_count' => Order::all()->count(),
+        'products_count' => Product::all()->count(),
+        'sum_orders' => $sum
+    ]);
+});
+
+Route::get('/superuser-requests', function () {
+   return view('superuser.superuser_seller_requests', [
+       'category_list' => \App\Models\Category::all(),
+       'requests' => \App\SellerRequest::all(),
+   ]);
+});
+
+Route::get('/superuser-items', function () {
+    return view('superuser.superuser_all_items', [
+        'category_list' => \App\Models\Category::all(),
+        'products' => Product::all(),
+    ]);
+});
+
+Route::get('/superuser-users', function () {
+    return view('superuser.superuser_all_users', [
+        'category_list' => \App\Models\Category::all(),
+        'users' => \App\User::all(),
+    ]);
+});
+
+Route::get('/remove-user/{id}', function ($id) {
+    if(Auth::user()->id !== $id) {
+        \App\User::destroy($id);
+    }
+        return back();
+})->name('remove-user');
+
+Route::get('/block-user/{id}', function ($id) {
+
+    if(Auth::user()->id !== $id) {
+
+    }
+
+    return back();
+})->name('block-user');
+
+
+Route::get('/superuser-sellers', function () {
+    return view('superuser.superuser_all_sellers', [
+        'category_list' => \App\Models\Category::all(),
+        'sellers' => \App\Seller::all(),
+    ]);
+});
+
+Route::get('/superuser-orders', function () {
+    return view('superuser.superuser_all_orders', [
+        'category_list' => \App\Models\Category::all(),
+        'orders' => Order::all(),
+    ]);
+});
