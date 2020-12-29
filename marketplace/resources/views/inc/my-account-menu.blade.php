@@ -23,6 +23,9 @@
     'Мої замовлення'=>'my-account/my-orders',
     'Обране'=>'my-account/chosen',
     'Відгуки про сайт'=>'my-account/feedback',
+    'Мої товари'=>'my-account/my-items',
+    'Моя статистика'=>'my-account/my-statistics',
+    'Замовлення на товари'=>'my-account/my-items-order',
     'Сторінка супер-користувача'=>'superuser-main',
     'Вийти'=>'logout']
 
@@ -70,6 +73,8 @@
     @else
         @if($page_url == $pages_super['Сторінка супер-користувача'])
             <a href="/{{$page_url}}" class="hide-button"><div class="d-flex align-items-center super-button">{{$page_name}}</div></a>
+        @elseif(isset($seller) and ($page_url == $pages_seller['Мої товари'] or  $page_url == $pages_seller['Моя статистика'] or $page_url == $pages_seller['Замовлення на товари']))
+            <a href="/{{$page_url}}" class="hide-button"><div class="d-flex align-items-center seller-button">{{$page_name}}</div></a>
         @else
             <a href="/{{$page_url}}" class="hide-button"><div class="d-flex align-items-center">{{$page_name}}</div></a>
         @endif
