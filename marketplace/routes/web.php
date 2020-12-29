@@ -7,7 +7,6 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
 use App\Models\Order;
 use App\Models\OrderedProduct;
-use App\Models\Product;
 use App\Seller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +25,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $product_list = \App\Models\Product::all();
     $category_list = \App\Models\Category::all();
-    return view('welcome', ['product_list' => $product_list, 'category_list' => $category_list]);
+    $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
+    return view('welcome', ['product_list' => $product_list,
+        'category_list' => $category_list,
+        'chosen_list' => $chosen_list]);
 })->name('home');
-
 
 Route::get('/my-account', function () {
     $category_list = \App\Models\Category::all();
@@ -117,32 +118,9 @@ Route::get('/my-account/my-orders', function () {
 Route::get('/my-account/my-items', function () {
     $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    $seller_products = Product::where('seller_id', '=', $seller->id)->get();
-
-    return view('my_account_seller_items', [
-        'seller' => $seller,
-        'seller_products' => $seller_products
-        'category_list' => $category_list
-    ]);
+    return view('my_account_seller_items', ['seller' => $seller, 'category_list' => $category_list]);
 })->name('items')->middleware('auth');
 
-Route::get('/add-product', function () {
-    return view('add_product');
-})->name('add-product');
-
-Route::get('/remove-product/{id}', function ($id) {
-
-    Product::destroy($id);
-
-
-    return back();
-})->name('remove-product');
-
-Route::get('/product/{id}', function ($id) {
-    return view('product', [
-        'product' => Product::find($id),
-    ]);
-})->name('product');
 
 Route::get('/my-account/my-statistics', function () {
     $category_list = \App\Models\Category::all();
@@ -160,8 +138,34 @@ Route::get('/my-account/my-items-order', function () {
 
 Route::get('/cart', function () {
     $category_list = \App\Models\Category::all();
-    return view('cart', ['category_list' => $category_list]);
+    $cart_products = \App\User::where('id', '=', Auth::user()->id)->get()->first()->cart()->first()->cart_product()->get();
+    $overall_price = 0;
+    foreach($cart_products as $cart_product) {
+        $overall_price += $cart_product->product->price;
+    }
+    return view('cart', [
+        'category_list' => $category_list,
+        'cart_products' => $cart_products,
+        'overall_price' => $overall_price]);
 })->name('cart');
+
+Route::get('/cart/confirm', function () {
+    $category_list = \App\Models\Category::all();
+    return view('confirm_order', ['category_list' => $category_list]);
+})->name('cart-confirm');
+
+
+//to do!!!!!!!!!!!!!!!!
+Route::post('/cart/add', function ($cart_product) { //increment product_number in cart_product
+    $category_list = \App\Models\Category::all();
+    return view('confirm_order', ['category_list' => $category_list]);
+})->name('cart-confirm');
+
+Route::post('/cart/remove', function ($cart_product) { //remove cart_product entry completely
+    $category_list = \App\Models\Category::all();
+    return view('confirm_order', ['category_list' => $category_list]);
+})->name('cart-confirm');
+//to do!!!!!!!!!!!!!!!!
 
 Route::post('/my-account/change-user-data', [SessionController::class, 'changeUserData'])->name('change-udata');
 Route::post('/my-account/change-password', [SessionController::class, 'changePassword'])->name('change-password');
@@ -184,3 +188,16 @@ Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name
 
 Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFromChosen'])->name('remove-chosen');
 Route::get('/my-account/chosen/add/{id}', [ChosenController::class, 'addToChosen'])->name('add-chosen');
+
+
+Route::get('/{id}', function ($id) {
+    $product_list = \App\Models\Category::where('id', '=', $id)->get()->first()->product()->get();
+    $category_list = \App\Models\Category::all();
+    $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
+    return view('welcome', [
+        'product_list' => $product_list,
+        'category_list' => $category_list,
+        'chosen_list' => $chosen_list,
+        'chosen_id' => $id,
+        ]);
+})->name('home-category');

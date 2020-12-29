@@ -6,23 +6,30 @@
     <main>
 
             <div class="products">
-                @for($j = 0; $j < 10; $j++)
                     @for($i = 0; $i < count($product_list); $i++)
                     <div class="product">
-
-                        <div class="add_product_to">
-                            <div class="fav_icon"></div>
-                        </div>
+                        <a class="add_product_to" href="{{route('add-chosen', ['id' => $product_list[$i]->id])}}">
+                        @if(!count($chosen_list))
+                            <img class="fav_icon" src="{{asset('img/heart.svg')}}"/>
+                        @else
+                            @for($j = 0; $j < count($chosen_list); $j++)
+                                @if($product_list[$i] != $chosen_list[$j])
+                                    <img class="fav_icon" src="{{asset('img/heart_chosen.svg')}}"/>
+                                @else
+                                    <img class="fav_icon" src="{{asset('img/heart.svg')}}"/>
+                                @endif
+                            @endfor
+                        @endif
+                        </a>
                         <img src="{{asset('img/products/'.$product_list[$i]->photo_path)}}" class="product_icon">
-                        <div class="add_product_to" style="margin-top: 47px">
+                        <a class="add_product_to" style="margin-top: 47px; display: block" href="{{route('add-cart', ['id' => $product_list[$i]->id])}}">
                             <div class="cart_icon">
                             </div>
-                        </div>
+                        </a>
                         <p class="product_name">{{$product_list[$i]->product_name}}</p>
                         <p class="product_price">{{$product_list[$i]->price}} &#8372;</p>
                     </div>
                     @endfor
-                @endfor
             </div>
 
         <!-- Vendor scripts -->

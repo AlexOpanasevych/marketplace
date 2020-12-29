@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CartProduct extends Model
 {
+    protected $table = 'cart_product';
 
     public function cart() {
         return $this->belongsTo(Cart::class);
