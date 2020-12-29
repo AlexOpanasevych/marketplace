@@ -20,10 +20,10 @@ class CartController extends Controller
                 $cart->user_id = $user_id;
                 $cart->save();
             }
-            $cart_product = new Product();
+            $cart_product = new CartProduct();
             $cart_product->product_id = $id;
             $cart_product->card_id = $cart->id;
-            $cart_product->product_number = $product->product_number;
+            $cart_product->product_number = 1;
             $cart_product->save();
         }
         return back();

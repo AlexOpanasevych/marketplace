@@ -28,7 +28,7 @@
                 <div class="delivery_info">
                     <input type="email" name="email" placeholder="Ел. пошта" style="margin-top: 0">
                     <input type="text" name="phone_number" placeholder="Номер телефону" required>
-                    <button type="submit" name="confirm_delivery">Оформити замовлення</button>
+                    <button type="submit" name="confirm_delivery"><a style="outline: none; color: white; text-decoration: none" href="{{route('home')}}">Оформити замовлення</a></button>
                 </div>
             </form>
         </div>

@@ -9,6 +9,10 @@
     font-family: 'Raleway', sans-serif;
 }
 
+main {
+    min-height: 837px;
+}
+
 header{
     padding: 0 150px;
     height: 100px;
@@ -350,7 +354,6 @@ main .main_page{
 }
 
 .products .product .add_product_to .fav_icon{
-    content: url(../img/add_to_favourite.svg);
     height: 30px;
     width: 30px;
     margin: 5px 4px;
