@@ -5,10 +5,18 @@
         <div class="categories_popup_fade">
             <div class="categories_popup">
                 @for($i = 0; $i < count($category_list); $i++)
-                    @if($i != count($category_list) - 1)
-                        <a href="#" name="category">{{$category_list[$i]->category_name}}</a>
+                    @if(isset($chosen_id) && $category_list[$i]->id == $chosen_id)
+                        @if($i != count($category_list) - 1)
+                            <a name="category" style="color:black">{{$category_list[$i]->category_name}}</a>
+                        @else
+                            <a name="category" style="color:black" style="border: none">{{$category_list[$i]->category_name}}</a>
+                        @endif
                     @else
-                        <a href="#" name="category" style="border: none">{{$category_list[$i]->category_name}}</a>
+                        @if($i != count($category_list) - 1)
+                            <a href="{{route('home-category', ['id' => $category_list[$i]->id])}}" name="category">{{$category_list[$i]->category_name}}</a>
+                        @else
+                            <a href="{{route('home-category', ['id' => $category_list[$i]->id])}}" name="category" style="border: none">{{$category_list[$i]->category_name}}</a>
+                        @endif
                     @endif
                 @endfor
             </div>
