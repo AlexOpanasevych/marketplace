@@ -50,7 +50,7 @@
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
                         <div class="col-md-2">id: <a style="color: black; font-weight: bold" href="#">{{$i->id}}</a></div>
                         <div class="col-md-4">Користувач: {{$i->name}} <span class="text-muted">{{$i->email}}</span></div>
-                        <div class="col-md-2">Продавець: {{$i->seller()->company_name ?? ''}}/div>
+                        <div class="col-md-2">Продавець: {{$i->seller()->company_name}}/div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
                             <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-warning "><a href="{{route('block-user', ['id' => $i->id])}}">Заблокувати</a></button>
                             <button style=" min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('remove-user', ['id' => $i->id])}}">Видалити</a></button>

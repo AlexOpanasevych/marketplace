@@ -36,7 +36,7 @@
             @if($loop -> first)
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid; border-top: silver 2px solid">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Користувач: {{$i->user()->name}}</div>
+                        <div class="col-md-4">Користувач: {{$i->user->name}}</div>
                         <div class="col-md-4">Назва компанії (ФОП): {{$i->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
                             <button style="margin-right: 5px; min-width: 100px; font-size: 12px; font-weight: bold" type="button" class="btn btn-danger "><a href="{{route('ban-seller', ['id' => $i->id])}}">Забрати статус продавця</a></button>
@@ -47,7 +47,7 @@
             @else
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid;">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Користувач: {{$i->user()->name}} </div>
+                        <div class="col-md-4">Користувач: {{$i->user->name}} </div>
                         <div class="col-md-4">Назва компанії (ФОП): {{$i->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
                             <button style="margin-right: 5px; min-width: 100px; font-size: 12px; font-weight: bold" type="button" class="btn btn-danger "><a href="{{route('ban-seller', ['id' => $i->id])}}">Забрати статус продавця</a></button>

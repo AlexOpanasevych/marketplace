@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderedProduct;
 use App\Models\Product;
 use App\Seller;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -285,7 +286,7 @@ Route::get('/superuser-users', function () {
 
 Route::get('/remove-user/{id}', function ($id) {
     if(Auth::user()->id !== $id) {
-        \App\User::destroy($id);
+        User::destroy($id);
     }
         return back();
 })->name('remove-user');
@@ -293,7 +294,7 @@ Route::get('/remove-user/{id}', function ($id) {
 Route::get('/block-user/{id}', function ($id) {
 
     if(Auth::user()->id !== $id) {
-
+        User::destroy($id);
     }
 
     return back();
@@ -315,3 +316,15 @@ Route::get('/superuser-orders', function () {
 });
 
 
+Route::get('/ban-seller/{id}', function ($id) {
+    Seller::destroy($id);
+    return back();
+})->name('ban-seller');
+
+Route::get('/ban-products/{id}', function ($id) {
+    $products = Product::where('seller_id', '=', $id);
+    foreach ($products as $i) {
+        Product::destroy($i->id);
+    }
+    return back();
+})->name('ban-products');
