@@ -117,7 +117,7 @@ header #product_search input[type="search"]:focus{
     outline: none;
 }
 
-header #product_search button{
+header #product_search input[type="submit"]{
     font-size: 18px;
     height: 40px;
     width: 125px;
@@ -131,7 +131,7 @@ header #product_search button{
     border-bottom-right-radius: 5px;
 }
 
-header #product_search button:hover{
+header #product_search input[type="submit"]:hover{
     filter: brightness(120%);
 }
 

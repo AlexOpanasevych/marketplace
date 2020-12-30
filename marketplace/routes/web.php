@@ -41,6 +41,30 @@ Route::get('/', function () {
         'products_id' => $products_id]);
 })->name('home');
 
+Route::post('/search', function () {
+    $id = request('search_query', '');
+    return $id ? redirect()->route('search-id', ['id' => $id]) : redirect()->route('home');
+})->name('search');
+Route::get('/search', function () {
+    return redirect()->route('home');
+})->name('search');
+
+Route::get('/search/{id}', function ($id) {
+    $product_list = \App\Models\Product::where('product_name', 'like', "%".$id."%")->get();
+    $products_id = [];
+    foreach(\App\Models\CartProduct::all() as $item) {
+        array_push($products_id, $item->product_id);
+    }
+    $category_list = \App\Models\Category::all();
+    $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
+    return view('welcome', [
+        'product_list' => $product_list,
+        'category_list' => $category_list,
+        'chosen_list' => $chosen_list,
+        'products_id' => $products_id,
+        'id' => $id]);
+})->name('search-id');
+
 Route::get('/my-account', function () {
     $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
