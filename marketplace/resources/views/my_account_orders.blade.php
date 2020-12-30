@@ -14,9 +14,12 @@
                     <div class="my-info">
                         <h1>Мої замовлення</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
-                        <p>Всього замовлень: {{count($orders_list)}}</p>
+                        <p>Всього замовлень: {{$orders_list->count()}}</p>
+{{--                        {{$orders_list->first()}}--}}
                         @foreach($orders_list as $order)
-                            @include('inc.my-account-order', ['order_info' => $order])
+{{--                            {{print($order)}}--}}
+{{--                            <a href="#">adada</a>--}}
+                            @include('inc.my-account-order', ['order_info' => $order, 'ordered_products' => $ordered_products_list, 'products_list' => $products_list, 'productprices' => $prod_prices])
                         @endforeach
 
                         </div>

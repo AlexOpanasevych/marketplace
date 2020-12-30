@@ -15,6 +15,10 @@ class Order extends Model
     public function ordered_product() {
         return $this->hasMany(OrderedProduct::class);
     }
+
+    public function product() {
+        return $this->hasManyThrough(OrderedProduct::class, Product::class);
+    }
     public function user() {
         return $this->belongsTo(User::class);
     }

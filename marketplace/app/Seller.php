@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
@@ -13,4 +14,8 @@ class Seller extends Model
     public function statistics() {
         return $this->hasMany(Statistics::class);
     }
+
+    public function product() {
+        return $this->hasMany(Product::class);
+}
 }

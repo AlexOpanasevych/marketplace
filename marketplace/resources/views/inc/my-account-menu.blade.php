@@ -72,7 +72,7 @@
         <a class="account-current-button hide-button"><div class="d-flex align-items-center">{{$page_name}}</div></a>
     @else
         @if($page_url == $pages_super['Сторінка супер-користувача'])
-            <a href="/{{$page_url}}" class="hide-button"><div class="d-flex align-items-center super-button">{{$page_name}}</div></a>
+            <a href="{{route('smain')}}" class="hide-button"><div class="d-flex align-items-center super-button">{{$page_name}}</div></a>
         @elseif(isset($seller) and ($page_url == $pages_seller['Мої товари'] or  $page_url == $pages_seller['Моя статистика'] or $page_url == $pages_seller['Замовлення на товари']))
             <a href="/{{$page_url}}" class="hide-button"><div class="d-flex align-items-center seller-button">{{$page_name}}</div></a>
         @else

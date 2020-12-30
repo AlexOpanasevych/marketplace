@@ -110,21 +110,30 @@ Route::get('/my-account/chosen', function () {
 })->name('chosen');
 
 Route::get('/my-account/my-orders', function () {
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
-    $category_list = \App\Models\Category::all();
-    $orders = Order::where('user_id', '=', Auth::user()->id)->get();
+    $seller = Auth::user()->seller()->first();
+    $orders = Auth::user()->order()->get();
     $orderedProductsList = [];
+    $productsList = [];
+    $array_order_prices = [];
     foreach ($orders as $order) {
-        $orderedProducts = OrderedProduct::leftJoin('orders', function ($join) use ($order) {
-            $join->on('ordered_product.order_id', '=', $order->id);
-        })->where('order_id', '=', $order->id)->get();
+        $orderedProducts = $order->ordered_product()->get();
+        $products = [];
+        $productsprices = [];
+        foreach ($orderedProducts as $orderedProduct) {
+            array_push($array_order_prices, $orderedProduct->product()->first()->price);
+            array_push($products, $orderedProduct->product()->first());
+        }
         array_push($orderedProductsList, $orderedProducts);
+        array_push($productsList, $products);
+        array_push($array_order_prices, $productsprices);
     }
-
     return view('my_account_orders', [
         'seller' => $seller,
-        'orders_list' => $orderedProductsList,
-        'category_list' => $category_list]);
+        'orders_list' => $orders,
+        'ordered_products_list' => $orderedProductsList,
+        'products_list' => $productsList,
+        'category_list' => \App\Models\Category::all(),
+        'prod_prices' => $array_order_prices]);
 })->name('orders')->middleware('auth');
 
 Route::get('/my-account/my-items', function () {
@@ -172,19 +181,19 @@ Route::get('/my-account/my-statistics', function () {
 
 Route::get('/my-account/my-items-order', function () {
     $category_list = \App\Models\Category::all();
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
+    $seller = Auth::user()->seller()->first();
+    $seller_products = Auth::user()->seller()->first()->product()->get();
 
-    $seller_products = Product::where('seller_id', '=', $seller->id)->leftJoin('ordered_products', 'products.id', '=', 'ordered_products.id')->get();
-//    foreach($seller_products as $product) {
-//        $order_number += $product->ordered_number;
-//    }
-    $orders = Order::leftJoin('users', function($join) {
-        $join->on('users.id', '=', 'orders.user_id');
-    })->get();
-    if(!empty($orders)) {
-        $orders = $orders->whereIn('id', '=', $seller_products->values('order_id'));
+    $orderedProducts = [];
+    $orders = [];
+    foreach($seller_products as $pr) {
+        $orderedPr = $pr->ordered_product()->get();
+//        dd(is_null($orderedPr->first()));
+        array_push($orders, $orderedPr->first()->order()->first());
+        array_push($orderedProducts, $orderedPr);
     }
-    return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list, 'seller_products' => $seller_products, 'orders' => $orders]);
+    return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list, 'seller_products' => $seller_products,
+        'orders' => $orders, 'ordered_products' => $orderedProducts]);
 })->name('iorder')->middleware('auth');
 
 
@@ -307,13 +316,14 @@ Route::get('/superuser-main', function () {
     $orders = Order::all();
     $sum  = 0;
     foreach ($orders as $order) {
-        $ordered_products = $order->ordered_product();
-        foreach ($ordered_products as $ordered_product) {
-            $products = $ordered_product->product();
-            foreach ($products as $product) {
-                $sum += $product->price;
-            }
-        }
+        $ordered_products = $order->ordered_product()->get();
+        dd($ordered_products);
+//        foreach ($ordered_products as $ordered_product) {
+//            $products = $ordered_product->first()->product()->first();
+//            foreach ($products as $product) {
+//                $sum += $product->price;
+//            }
+//        }
     }
 
     return view('superuser.superuser_main', [
@@ -324,7 +334,7 @@ Route::get('/superuser-main', function () {
         'products_count' => Product::all()->count(),
         'sum_orders' => $sum
     ]);
-});
+})->name('smain');
 
 Route::get('/superuser-requests', function () {
    return view('superuser.superuser_seller_requests', [
