@@ -266,9 +266,13 @@ Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFr
 Route::get('/my-account/chosen/add/{id}', [ChosenController::class, 'addToChosen'])->name('add-chosen');
 
 Route::get('/{id}', function ($id) {
-    $product_list = Product::find($id)->product()->get();
-    $category_list = \App\Models\Category::all();
+    $category = Category::find($id);
+    if(!is_null($category))
+        $product_list = Category::find($id)->product()->get();
+    else $product_list = new \Illuminate\Database\Eloquent\Collection();
     $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
+
+    $category_list = \App\Models\Category::all();
     $products_id = [];
     foreach(\App\Models\CartProduct::all() as $item) {
         array_push($products_id, $item->product_id);
