@@ -117,7 +117,7 @@ header #product_search input[type="search"]:focus{
     outline: none;
 }
 
-header #product_search input[type="submit"]{
+header #product_search button{
     font-size: 18px;
     height: 40px;
     width: 125px;
@@ -131,7 +131,7 @@ header #product_search input[type="submit"]{
     border-bottom-right-radius: 5px;
 }
 
-header #product_search input[type="submit"]:hover{
+header #product_search button:hover{
     filter: brightness(120%);
 }
 
@@ -361,15 +361,13 @@ main .main_page{
 
 
 .products .product .add_product_to .cart_icon{
-    content: url(../img/add_to_cart.svg);
     height: 30px;
     width: 30px;
     margin: 5px 4px;
 }
 
- .products .product .add_product_to:hover{
+ .products .product .add_product_to_hover:hover{
     background-color: #EEEDE7;
-    cursor: pointer;
 }
 
  .products .product .product_icon{
