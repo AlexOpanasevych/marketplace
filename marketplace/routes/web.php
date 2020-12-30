@@ -8,6 +8,7 @@ use App\Http\Controllers\SessionController;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderedProduct;
+use App\Models\Product;
 use App\Seller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -147,7 +148,8 @@ Route::get('/remove-product/{id}', function ($id) {
 
 Route::get('/product/{id}', function ($id) {
     return view('product', [
-        'product' => Product::find($id),
+        'item' => Product::find($id),
+        'product_comments' => \App\Models\Comment::where('product_id', '=', $id)
     ]);
 })->name('product');
 

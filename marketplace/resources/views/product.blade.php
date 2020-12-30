@@ -6,13 +6,13 @@
     <main>
         <div class="product_block">
             <div class="product_photo">
-                <img id="fixblock" src="img/5a3a540e634e59.16223150151377204640685054.png">
+                <img id="fixblock" src="{{asset($item->photo_path)}}">
             </div>
             <div class="product_info">
-                <p class="product_name">Унитаз.пнг</p>
+                <p class="product_name">{{$item->product_name}}</p>
                 <div class="buy_product">
-                    <p>499.99 &#8372;</p>
-                    <button class="add_product_to_cart">Придбати</button>
+                    <p>{{$item->price}} &#8372;</p>
+                    <a href="{{route('add-cart', ['id' => $item->id])}}"><button class="add_product_to_cart">Придбати</button></a>
                     <div class="favourite_icon" >
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              viewBox="-5 -25 500 490" style="enable-background:new 0 0 485 485;" xml:space="preserve">
@@ -23,19 +23,19 @@
                     </div>
                 </div>
                 <h1>Опис товару:</h1>
-                <p class="product_description">asdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasdasdasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqf</p>
+                <p class="product_description">{{$item->description}}</p>
                 <div class="product_coments">
-                    <form class="add_coment">
-                        <textarea name="product_descripton" required></textarea>
+                    <form class="add_coment" method="post" action="{{route('add-comment', ['id' => $id])}}">
+                        <textarea name="product_comment" required></textarea>
                         <button type="submit" name="add_coment">Залишити відгук</button>
                     </form>
                 </div>
                 <h1 style="border-radius: 0;">Відгуки інших покупців:</h1>
                 <div class="product_description" style="padding-top: 30px">
-                    <h3>Name</h3>
-                    <p>asdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasdasdasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqf</p>
-                    <h3>Name</h3>
-                    <p>asdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasdasdasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqfasdasdasd[qwkdqwd[qwdokq[dqwkd[qwdk;qsd;ksqd'kqdlqofejmqepfokjqfep[qefjeqf</p>
+                    @foreach($product_comments as $i)
+{{--                    <h3>{{$i->product->product_name}}</h3>--}}
+                    <p>{{$i->text}}</p>
+                    @endforeach
                 </div>
             </div>
         </div>
