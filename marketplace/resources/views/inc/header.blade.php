@@ -23,8 +23,18 @@
         </div>
     </div>
     <div id="product_search">
-        <input type="search" name="search" placeholder="Пошук товарів">
-        <input type="submit" value="Найти">
+        <form method="POST" action="{{route('home')}}">
+            @csrf
+            <input type="search" name="a" id="a" placeholder="Пошук товарів">
+            <button onclick="add()">Найти</button>
+        </form>
+
+        <script>
+            function add() {
+                var a = document.getElementById('a').value;
+                {{route('home-category', ['id' => 1])}}
+            }
+        </script>
     </div>
     <div id=header_buttons>
 

@@ -22,9 +22,20 @@ class CartController extends Controller
             }
             $cart_product = new CartProduct();
             $cart_product->product_id = $id;
-            $cart_product->card_id = $cart->id;
+            $cart_product->cart_id = $cart->id;
             $cart_product->product_number = 1;
             $cart_product->save();
+        }
+        return back();
+    }
+
+    public function incrementInCart($id) {
+        if(Auth::check()) {
+            $cart_product = CartProduct::find($id);
+            if(isset($cart_product)) {
+                $cart_product->product_number += 1;
+                $cart_product->save();
+            }
         }
         return back();
     }
