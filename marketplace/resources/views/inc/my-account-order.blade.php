@@ -18,5 +18,5 @@
     @endforeach
 
 </div>
-<div style="font-size: 15px" class="d-flex justify-content-end">Всього: 999 грн</div>
+<div style="font-size: 15px" class="d-flex justify-content-end">Всього:  грн</div>
 <div style="height: 2px; background-color: black; margin-bottom: 50px"></div>

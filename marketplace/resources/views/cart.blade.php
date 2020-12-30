@@ -4,7 +4,7 @@
 
 @section('page-content')
     <main>
-        <h1 class="num_of_products">Всього товарів: {{count($cart_products)}}</h1>
+        <h1 class="num_of_products">Всього товарів: {{$overall_products}}</h1>
         <div class="shopping_horizontal_line_up"></div>
         <div class="owl-carousel owl-theme">
 
@@ -12,10 +12,10 @@
                 <div id="shopping_items">
                     <div class="shopping_piece js-item-campaign">
                         <div class="shopping_top_panel">
-                            <a href="{{route('cart-add', ['cart_product' => $cart_product])}}" class="add_more_back" style="text-decoration: none; color: black">
+                            <a href="{{route('increment-cart', ['id' => $cart_product->id])}}" class="add_more_back" style="text-decoration: none; color: black">
                                 <div class="add_more">{{$cart_product->product_number}}x</div>
                             </a>
-                            <a href="{{route('cart-cancel', ['$cart_product' => $cart_product])}}" class="cancel_back">
+                            <a href="{{route('remove-cart', ['id' => $cart_product->id])}}" class="cancel_back">
                                 <div class="cancel"></div>
                             </a>
                         </div>

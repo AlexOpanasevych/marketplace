@@ -22,14 +22,21 @@
                         @endif
                         </a>
                         <img src="{{asset('img/products/'.$product_list[$i]->photo_path)}}" class="product_icon">
-                        <a class="add_product_to" style="margin-top: 47px; display: block" href="{{route('add-cart', ['id' => $product_list[$i]->id])}}">
-                            <div class="cart_icon">
+                        @if(in_array($product_list[$i]->id, $products_id))
+                            <div class="add_product_to" style="margin-top: 47px">
+                                <img class="cart_icon" src="{{asset('img/shopping-cart.svg')}}">
                             </div>
-                        </a>
-                        <a href="{{route('product', ['id' => $product_list[$i]->id])}}" class="product_name">{{$product_list[$i]->product_name}}</a>
+                        @else
+                            <a class="add_product_to add_product_to_hover" style="margin-top: 47px; display: block" href="{{route('add-cart', ['id' => $product_list[$i]->id])}}">
+                                <img class="cart_icon" src="{{asset('img/shopping-cart-empty.svg')}}">
+                            </a>
+                        @endif
+                        <p class="product_name">{{$product_list[$i]->product_name}}</p>
                         <p class="product_price">{{$product_list[$i]->price}} &#8372;</p>
                     </div>
                     @endfor
+
+
             </div>
 
         <!-- Vendor scripts -->

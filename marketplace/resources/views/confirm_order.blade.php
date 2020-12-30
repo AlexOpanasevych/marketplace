@@ -6,7 +6,8 @@
     <main>
         <div class="delivery">
             <h1>Введіть дані для отримання замовлення:</h1>
-            <form class="order_info">
+            <form class="order_info" method="post" action="{{route('home-confirm')}}">
+                @csrf
                 <p>ФІО:</p>
                 <div class="delivery_info">
                     <input type="text" name="second_name" placeholder="Прізвище" required>
@@ -28,7 +29,7 @@
                 <div class="delivery_info">
                     <input type="email" name="email" placeholder="Ел. пошта" style="margin-top: 0">
                     <input type="text" name="phone_number" placeholder="Номер телефону" required>
-                    <button type="submit" name="confirm_delivery"><a style="outline: none; color: white; text-decoration: none" href="{{route('home')}}">Оформити замовлення</a></button>
+                    <button type="submit" name="confirm_delivery">Оформити замовлення</button>
                 </div>
             </form>
         </div>

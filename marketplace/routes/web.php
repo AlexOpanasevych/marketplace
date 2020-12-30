@@ -29,11 +29,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $product_list = \App\Models\Product::all();
+    $products_id = [];
+    foreach(\App\Models\CartProduct::all() as $item) {
+        array_push($products_id, $item->product_id);
+    }
+
     $category_list = \App\Models\Category::all();
     $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
-    return view('welcome', ['product_list' => $product_list,
+    return view('welcome', [
+        'product_list' => $product_list,
         'category_list' => $category_list,
-        'chosen_list' => $chosen_list]);
+        'chosen_list' => $chosen_list,
+        'products_id' => $products_id]);
 })->name('home');
 
 Route::get('/my-account', function () {
@@ -184,14 +191,17 @@ Route::get('/my-account/my-items-order', function () {
 Route::get('/cart', function () {
     $category_list = \App\Models\Category::all();
     $cart_products = \App\User::where('id', '=', Auth::user()->id)->get()->first()->cart()->first()->cart_product()->get();
+    $overall_products = 0;
     $overall_price = 0;
     foreach($cart_products as $cart_product) {
-        $overall_price += $cart_product->product->price;
+        $overall_price += $cart_product->product->price * $cart_product->product_number;
+        $overall_products += $cart_product->product_number;
     }
     return view('cart', [
         'category_list' => $category_list,
         'cart_products' => $cart_products,
-        'overall_price' => $overall_price]);
+        'overall_price' => $overall_price,
+        'overall_products' => $overall_products]);
 })->name('cart');
 
 Route::get('/cart/confirm', function () {
@@ -199,18 +209,29 @@ Route::get('/cart/confirm', function () {
     return view('confirm_order', ['category_list' => $category_list]);
 })->name('cart-confirm');
 
+Route::post('/cart/confirm', function (Request $request) {
+    if(Auth::check()) {
+        $cart_id = Auth::user()->cart()->first()->id;
+        $cart_products = \App\Models\CartProduct::where('cart_id', '=', $cart_id);
 
-//to do!!!!!!!!!!!!!!!!
-Route::post('/cart/add', function ($cart_product) { //increment product_number in cart_product
-    $category_list = \App\Models\Category::all();
-    return view('confirm_order', ['category_list' => $category_list]);
-})->name('cart-confirm');
+        $newOrder = new Order;
+        $newOrder->user_id = Auth::user()->id;
+        $newOrder->status_id = 1;
+        $newOrder->save();
 
-Route::post('/cart/remove', function ($cart_product) { //remove cart_product entry completely
-    $category_list = \App\Models\Category::all();
-    return view('confirm_order', ['category_list' => $category_list]);
-})->name('cart-confirm');
-//to do!!!!!!!!!!!!!!!!
+        $cart_products_get = $cart_products->get();
+        foreach ($cart_products_get as $prod) {
+            $ord_prod = new OrderedProduct();
+            $ord_prod->order_id = $newOrder->id;
+            $ord_prod->product_id = $prod->product_id;
+            $ord_prod->ordered_number = $prod->product_number;
+            $ord_prod->save();
+        }
+
+        $cart_products->delete();
+    }
+    return redirect()->route('home');
+})->name('home-confirm');
 
 Route::post('/my-account/change-user-data', [SessionController::class, 'changeUserData'])->name('change-udata');
 Route::post('/my-account/change-password', [SessionController::class, 'changePassword'])->name('change-password');
@@ -229,6 +250,7 @@ Route::post('/my-account/address', [SessionController::class, 'changeAddress'])-
 Route::post('/my-account/email', [SessionController::class, 'sendFeedback'])->name('feedback');
 
 Route::get('/cart/add/{id}', [CartController::class, 'addToCart'])->name('add-cart');
+Route::get('/cart/increment/{id}', [CartController::class, 'incrementInCart'])->name('increment-cart');
 Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('remove-cart');
 
 Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFromChosen'])->name('remove-chosen');
@@ -238,15 +260,20 @@ Route::get('/{id}', function ($id) {
     $product_list = Product::find($id)->product()->get();
     $category_list = \App\Models\Category::all();
     $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
+    $products_id = [];
+    foreach(\App\Models\CartProduct::all() as $item) {
+        array_push($products_id, $item->product_id);
+    }
     return view('welcome', [
         'product_list' => $product_list,
         'category_list' => $category_list,
         'chosen_list' => $chosen_list,
         'chosen_id' => $id,
+        'products_id' => $products_id
         ]);
 })->name('home-category');
 
-Route::post('/add-product', function (Request $request) {
+Route::post('/add-product', function (Request $request){
     $product_name = $request->product_name;
 //    if(!isset($product_exists)) {
         $product_quantity = $request->product_quantity;
@@ -260,6 +287,7 @@ Route::post('/add-product', function (Request $request) {
         $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
 
         $product = new Product();
+        $product->product_name = $product_name;
         $product->quantity = $product_quantity;
         $product->price = $product_price;
         $product->description = $product_descripton;

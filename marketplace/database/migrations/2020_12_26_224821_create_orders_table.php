@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('status_id');
             $table->foreignId('user_id');
             $table->timestamp('confirmation_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+
         });
     }
 
