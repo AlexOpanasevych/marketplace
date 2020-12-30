@@ -6,7 +6,7 @@
     <main>
         <div class="product_block">
             <div class="product_photo">
-                <img id="fixblock" src="{{asset($item->photo_path)}}">
+                <img id="fixblock" src="{{asset('img/products/'.$item->photo_path)}}">
             </div>
             <div class="product_info">
                 <p class="product_name">{{$item->product_name}}</p>
@@ -25,7 +25,7 @@
                 <h1>Опис товару:</h1>
                 <p class="product_description">{{$item->description}}</p>
                 <div class="product_coments">
-                    <form class="add_coment" method="post" action="{{route('add-comment', ['id' => $id])}}">
+                    <form class="add_coment" method="post" action="{{route('add-comment', ['id' => $item->id])}}">
                         <textarea name="product_comment" required></textarea>
                         <button type="submit" name="add_coment">Залишити відгук</button>
                     </form>

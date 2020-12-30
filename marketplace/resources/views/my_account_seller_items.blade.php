@@ -17,12 +17,12 @@
                         <p style="margin: 0">Всього товарів: {{count($seller_products)}}</p>
                         <div class="d-flex align-items-center" style="margin-bottom: 50px">
                             <p style="font-weight: normal; margin: 0 10px 0 0;">Тут ви зможете змінити свої товари та додати нові: </p>
-                            <a href=""><img style="height: 30px" src="{{asset('img/plus.svg')}}"></a>
+                            <a href="{{route('add-product')}}"><img style="height: 30px" src="{{asset('img/plus.svg')}}"></a>
                         </div>
                         <div class="row wow fadeIn card-deck">
                         @foreach($seller_products as $i)
                                 <div class="col-lg-4 d-flex align-items-stretch" style="">
-                                    @include('inc.my-account-seller-item')
+                                    @include('inc.my-account-seller-item', ['item' => $i])
                                 </div>
                             @endforeach
 

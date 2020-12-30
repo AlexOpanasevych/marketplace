@@ -6,7 +6,8 @@
     <main style="min-height: 100vh">
         <div class="delivery" style="margin-top: 50px;">
             <h1>Введіть інформацію про товар:</h1>
-            <form class="order_info" method="post" action="{{route('add-product')}}">
+            <form class="order_info" method="post" action="/add-product">
+                @csrf
                 <div class="delivery_info">
                     <input type="text" name="product_name" placeholder="Назва товару" required>
                     <input type="text" name="product_quantity" placeholder="Кількість товару" required>

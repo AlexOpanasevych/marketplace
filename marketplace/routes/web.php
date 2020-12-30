@@ -6,11 +6,13 @@ use App\Http\Controllers\ChosenController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderedProduct;
 use App\Models\Product;
 use App\Seller;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -149,7 +151,8 @@ Route::get('/remove-product/{id}', function ($id) {
 Route::get('/product/{id}', function ($id) {
     return view('product', [
         'item' => Product::find($id),
-        'product_comments' => \App\Models\Comment::where('product_id', '=', $id)
+        'product_comments' => \App\Models\Comment::where('product_id', '=', $id),
+        'category_list' => \App\Models\Category::all(),
     ]);
 })->name('product');
 
@@ -232,7 +235,7 @@ Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFr
 Route::get('/my-account/chosen/add/{id}', [ChosenController::class, 'addToChosen'])->name('add-chosen');
 
 Route::get('/{id}', function ($id) {
-    $product_list = \App\Models\Category::where('id', '=', $id)->get()->first()->product()->get();
+    $product_list = Product::find($id)->product()->get();
     $category_list = \App\Models\Category::all();
     $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
     return view('welcome', [
@@ -243,12 +246,9 @@ Route::get('/{id}', function ($id) {
         ]);
 })->name('home-category');
 
-Route::post('/add-product', function (\Illuminate\Support\Facades\Request $request) {
-
-
+Route::post('/add-product', function (Request $request) {
     $product_name = $request->product_name;
-    $product_exists = Product::where('product_name', '=', $product_name);
-    if(!isset($product_exists)) {
+//    if(!isset($product_exists)) {
         $product_quantity = $request->product_quantity;
         $product_price = $request->product_price;
         $product_descripton = $request->product_descripton;
@@ -257,7 +257,7 @@ Route::post('/add-product', function (\Illuminate\Support\Facades\Request $reque
 
         $category = \App\Models\Category::where('category_name', '=', $product_category);
 
-        $seller = Seller::where('user_id', '=', Auth::user()->id);
+        $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
 
         $product = new Product();
         $product->quantity = $product_quantity;
@@ -269,16 +269,11 @@ Route::post('/add-product', function (\Illuminate\Support\Facades\Request $reque
         $product->save();
 
         return back();
-
-    }
-    else {
-        return back()->withErrors([
-            'product.exists' => 'Продукт з заданим ім\'ям існує',
-        ]);
-    }
 })->name('add-product');
 
+Route::post('/add-comment', function (Request $request) {
 
+})->name('add-comment');
 Route::get('/superuser-main', function () {
 
     $orders = Order::all();

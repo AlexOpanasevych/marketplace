@@ -26,7 +26,7 @@
                             <div class="cart_icon">
                             </div>
                         </a>
-                        <p class="product_name">{{$product_list[$i]->product_name}}</p>
+                        <a href="{{route('product', ['id' => $product_list[$i]->id])}}" class="product_name">{{$product_list[$i]->product_name}}</a>
                         <p class="product_price">{{$product_list[$i]->price}} &#8372;</p>
                     </div>
                     @endfor
