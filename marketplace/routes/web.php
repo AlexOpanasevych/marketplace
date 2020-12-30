@@ -122,9 +122,9 @@ Route::post('/my-account/become-seller', [SessionController::class, 'becomeSelle
 
 Route::get('/my-account/chosen', function () {
     $category_list = \App\Models\Category::all();
-    $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
+    $seller = Auth::user()->seller()->first();
 
-    $chosen_list = Chosen::where('user_id', '=', Auth::user()->id);
+    $chosen_list = Auth::user()->chosen()->get();
 
     return view('my_account_chosen', [
         'seller' => $seller,
@@ -212,8 +212,10 @@ Route::get('/my-account/my-items-order', function () {
     $orders = [];
     foreach($seller_products as $pr) {
         $orderedPr = $pr->ordered_product()->get();
-//        dd(is_null($orderedPr->first()));
-        array_push($orders, $orderedPr->first()->order()->first());
+//        dd($orderedPr);
+        if($orderedPr->count() > 0) {
+            array_push($orders, $orderedPr->first()->order()->first());
+        }
         array_push($orderedProducts, $orderedPr);
     }
     return view('my_account_seller_orders', ['seller' => $seller, 'category_list' => $category_list, 'seller_products' => $seller_products,
@@ -289,27 +291,6 @@ Route::get('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name
 Route::get('/my-account/chosen/remove/{id}', [ChosenController::class, 'removeFromChosen'])->name('remove-chosen');
 Route::get('/my-account/chosen/add/{id}', [ChosenController::class, 'addToChosen'])->name('add-chosen');
 
-Route::get('/{id}', function ($id) {
-    $category = Category::find($id);
-    if(!is_null($category))
-        $product_list = Category::find($id)->product()->get();
-    else $product_list = new \Illuminate\Database\Eloquent\Collection();
-    $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
-
-    $category_list = \App\Models\Category::all();
-    $products_id = [];
-    foreach(\App\Models\CartProduct::all() as $item) {
-        array_push($products_id, $item->product_id);
-    }
-    return view('welcome', [
-        'product_list' => $product_list,
-        'category_list' => $category_list,
-        'chosen_list' => $chosen_list,
-        'chosen_id' => $id,
-        'products_id' => $products_id
-        ]);
-})->name('home-category');
-
 Route::post('/add-product', function (Request $request){
     $product_name = $request->product_name;
 //    if(!isset($product_exists)) {
@@ -319,10 +300,9 @@ Route::post('/add-product', function (Request $request){
         $product_photo = $request->product_photo;
         $product_category = $request->product_category;
 
-        $category = \App\Models\Category::where('category_name', '=', $product_category);
-
-        $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
-
+        $category = \App\Models\Category::where('category_name', '=', $product_category)->first();
+//        return $category;
+        $seller = Auth::user()->seller()->first();
         $product = new Product();
         $product->product_name = $product_name;
         $product->quantity = $product_quantity;
@@ -340,18 +320,18 @@ Route::post('/add-comment', function (Request $request) {
 
 })->name('add-comment');
 Route::get('/superuser-main', function () {
-
     $orders = Order::all();
     $sum  = 0;
     foreach ($orders as $order) {
         $ordered_products = $order->ordered_product()->get();
-        dd($ordered_products);
-//        foreach ($ordered_products as $ordered_product) {
-//            $products = $ordered_product->first()->product()->first();
-//            foreach ($products as $product) {
-//                $sum += $product->price;
-//            }
-//        }
+//        dd($ordered_products);
+        foreach ($ordered_products as $ordered_product) {
+            $products = $ordered_product->product()->get();
+//            dd($products);
+            foreach ($products as $product) {
+                $sum += $product->price;
+            }
+        }
     }
 
     return view('superuser.superuser_main', [
@@ -365,9 +345,17 @@ Route::get('/superuser-main', function () {
 })->name('smain');
 
 Route::get('/superuser-requests', function () {
-   return view('superuser.superuser_seller_requests', [
+//   dd(\App\SellerRequest::user()->first());
+    $users = [];
+    $requests = \App\SellerRequest::all();
+    foreach ($requests as $request) {
+        array_push($users, $request->user()->first());
+    }
+//    dd($users);
+    return view('superuser.superuser_seller_requests', [
        'category_list' => \App\Models\Category::all(),
        'requests' => \App\SellerRequest::all(),
+        'users' => $users
    ]);
 });
 
@@ -410,9 +398,21 @@ Route::get('/superuser-sellers', function () {
 });
 
 Route::get('/superuser-orders', function () {
+    $orders = Order::all();
+    $order_prices = [];
+    foreach ($orders as $order) {
+        $prices = [];
+        $ordered_products = $order->ordered_product()->get();
+        foreach ($ordered_products as $product) {
+            if(!is_null($product->product()->first()))
+                array_push($prices, $product->product()->first()->price);
+        }
+        array_push($order_prices, $prices);
+    }
     return view('superuser.superuser_all_orders', [
         'category_list' => \App\Models\Category::all(),
-        'orders' => Order::all(),
+        'orders' => $orders,
+        'order_prices' => $order_prices
     ]);
 });
 
@@ -428,3 +428,32 @@ Route::get('/ban-products/{id}', function ($id) {
     }
     return back();
 })->name('ban-products');
+
+Route::get('/{id}', function ($id) {
+    $category = Category::find($id);
+    if(!is_null($category))
+        $product_list = Category::find($id)->product()->get();
+    else $product_list = new \Illuminate\Database\Eloquent\Collection();
+    $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
+
+    $category_list = \App\Models\Category::all();
+    $products_id = [];
+    foreach(\App\Models\CartProduct::all() as $item) {
+        array_push($products_id, $item->product_id);
+    }
+    return view('welcome', [
+        'product_list' => $product_list,
+        'category_list' => $category_list,
+        'chosen_list' => $chosen_list,
+        'chosen_id' => $id,
+        'products_id' => $products_id
+    ]);
+})->name('home-category');
+
+Route::get('/edit-product/{id}', function ($id) {
+
+})->name('edit-product');
+
+Route::get('/promote-product/{id}', function ($id) {
+
+})->name('promote-product');

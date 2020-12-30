@@ -14,7 +14,7 @@
                     <div class="my-info">
                         <h1>Моя інформація</h1>
                         <div style="height: 1px; margin-bottom: 40px; background-color: black"></div>
-                        <form class="d-flex flex-column" action="{{url()->current()}}/change-user-data" method="POST">
+                        <form class="d-flex flex-column" action="{{route('change-udata')}}" method="post">
                             @csrf
                             <h3>Введіть особисті данні:</h3>
                             <label>

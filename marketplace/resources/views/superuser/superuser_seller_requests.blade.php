@@ -36,10 +36,10 @@
             @if($loop -> first)
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid; border-top: silver 2px solid">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Користувач: {{$i->user()->firstname + ' ' + $i->user()->lastname + ' ' + $i->user()->patronymic}} <span class="text-muted">{{$i->user()->email}}</span></div>
+                        <div class="col-md-4">Користувач: {{$users[0]->firstname + ' ' + $users[0]->lastname + ' ' + $users[0]->patronymic}} <span class="text-muted">{{$users[0]->email}}</span></div>
                         <div class="col-md-4">Назва компанії (ФОП): {{$i->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
-                            <a style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-success "><a href="{{route('confirm-seller-request/{id}')}}">Додати</a></button>
+                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-success "><a href="{{route('confirm-seller-request/{id}')}}">Додати</a></button>
                                 <button style=" min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('decline-seller-request/{id}')}}">Видалити</a></button>
                         </div>
                     </div>
@@ -47,11 +47,11 @@
             @else
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid;">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Користувач: {{$i->user()->firstname + ' ' + $i->user()->lastname + ' ' + $i->user()->patronymic}} <span class="text-muted">{{$i->user()->email}}</span></div>
-                        <div class="col-md-4">Назва компанії (ФОП): {{$i->user()->email}}</div>
+                        <div class="col-md-4">Користувач: {{$users[$loop->index]->firstname + ' ' + $users[$loop->index]->lastname + ' ' + $users[$loop->index]->patronymic}} <span class="text-muted">{{$users[$loop->index]->email}}</span></div>
+                        <div class="col-md-4">Назва компанії (ФОП): {{$i->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
-                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-success "><a href="{{route('confirm-seller-request/{id}')}}>Додати</a></button>
-                            <button style=" min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('decline-seller-request/{id}')}}">Видалити</a></button>
+                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-success "><a href="{{route('confirm-seller-request', ['id' => $i->user_id])}}">Додати</a></button>
+                            <button style="min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('decline-seller-request', ['id', $i->user_id])}}">Видалити</a></button>
                         </div>
                     </div>
                 </div>

@@ -36,22 +36,22 @@
             @if($loop -> first)
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid; border-top: silver 2px solid">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Користувач: ххххх <span class="text-muted">(email)</span></div>
-                        <div class="col-md-2">Статус: ХХХХХ</div>
-                        <div class="col-md-2 text-muted">Дата: ХХХХХ</div>
+                        <div class="col-md-4">Користувач: {{$i->user()->first()->name}} <span class="text-muted">({{$i->user()->first()->email}})</span></div>
+                        <div class="col-md-2">Статус: {{$i->status()->first()->status_name}}</div>
+                        <div class="col-md-2 text-muted">Дата: {{$i->confirmation_date}}</div>
                         <div class="col-md-4 d-flex justify-content-end">
-                            Загальна сума: <b>xxxxxx грн</b>
+                            Загальна сума: <b>{{array_sum($order_prices[0])}} грн</b>
                         </div>
                     </div>
                 </div>
             @else
                 <div class=" d-flex align-items-center" style="height: 50px; border-bottom: silver 2px solid;">
                     <div class="row d-flex align-items-center" style="width: 100%; padding: 0; margin: 0; font-size: 12px">
-                        <div class="col-md-4">Користувач: ххххх <span class="text-muted">(email)</span></div>
-                        <div class="col-md-2">Статус: ХХХХХ</div>
-                        <div class="col-md-2 text-muted">Дата: ХХХХХ</div>
+                        <div class="col-md-4">Користувач: {{$i->user()->first()->name}}<span class="text-muted">({{$i->user()->first()->email}})</span></div>
+                        <div class="col-md-2">Статус: {{$i->status()->first()->status_name}}</div>
+                        <div class="col-md-2 text-muted">Дата: {{$i->confirmation_date}}</div>
                         <div class="col-md-4 d-flex justify-content-end">
-                            Загальна сума: <b>xxxxxx грн</b>
+                            Загальна сума: <b>{{array_sum($order_prices[$loop->index])}} грн</b>
                         </div>
                     </div>
                 </div>

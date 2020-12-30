@@ -68,7 +68,7 @@ class SessionController extends Controller
         if (Auth::check()) {
             $request_data = $request->all();
             $validator = $this->admin_credential_rules($request_data);
-            $seller = Seller::where('user_id', '=', Auth::user()->id);
+            $seller = Seller::where('user_id', '=', Auth::user()->id)->first();
             if ($validator->fails()){
                 return back()->withErrors($validator->errors())->with([
                     'seller' => $seller
@@ -79,7 +79,7 @@ class SessionController extends Controller
                 $obj_user = User::find($user_id);
                 $obj_user->password = Hash::make($request_data['password']);
                 $obj_user->save();
-                return redirect()->intended('info')->with([
+                return back()->with([
                     'seller' => $seller,
                 ]);
             }
@@ -112,7 +112,8 @@ class SessionController extends Controller
             'lastname' => 'required',
             'patronymic' => 'required',
         ], $messages);
-        $seller = Seller::where('user_id', '=', Auth::user()->id);
+        $seller = Seller::where('user_id', '=', Auth::user()->id)->first();
+//        dd($seller);
         if(!$validator->fails()) {
 
             $firstname = $request->name;
@@ -121,11 +122,12 @@ class SessionController extends Controller
             if(Auth::check()) {
                 $user_id = Auth::user()->id;
                 $obj_user = User::find($user_id);
-                $obj_user->firstname = $firstname;
+                $obj_user->name = $firstname;
                 $obj_user->lastname = $lastname;
                 $obj_user->patronymic = $patronymic;
                 $obj_user->save();
-                return back()->with([
+//                dd($obj_user);
+                return redirect()->route('info')->with([
                     'seller' => $seller,
                 ]);
             }
@@ -152,7 +154,7 @@ class SessionController extends Controller
             'phone' => 'required',
         ], $messages);
 
-        $seller = Seller::where('user_id', '=', Auth::user()->id);
+        $seller = Seller::where('user_id', '=', Auth::user()->id)->first();
         if(!$validator->fails()) {
 
             $email = $request->email;
@@ -202,7 +204,7 @@ class SessionController extends Controller
                 $record->save();
             }
         }
-        $seller = Seller::where('user_id', '=', Auth::user()->id);
+        $seller = Seller::where('user_id', '=', Auth::user()->id)->get();
         return back()->with([
             'seller' => $seller,
         ]);

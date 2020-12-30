@@ -18,5 +18,5 @@ class Product extends Model
     public function ordered_product() {
         return $this->hasMany(OrderedProduct::class);
     }
-
+    public $timestamps = FALSE;
 }
