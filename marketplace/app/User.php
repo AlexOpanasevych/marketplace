@@ -52,7 +52,7 @@ class User extends Authenticatable
     }
 
     public function seller() {
-        return $this->belongsTo(Seller::class);
+        return $this->hasOne(Seller::class);
     }
 
     public function feedback() {

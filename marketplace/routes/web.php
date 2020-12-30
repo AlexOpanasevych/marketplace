@@ -8,7 +8,9 @@ use App\Http\Controllers\SessionController;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderedProduct;
+use App\Models\Product;
 use App\Seller;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -146,7 +148,8 @@ Route::get('/remove-product/{id}', function ($id) {
 
 Route::get('/product/{id}', function ($id) {
     return view('product', [
-        'product' => Product::find($id),
+        'item' => Product::find($id),
+        'product_comments' => \App\Models\Comment::where('product_id', '=', $id)
     ]);
 })->name('product');
 
@@ -323,7 +326,7 @@ Route::get('/superuser-users', function () {
 
 Route::get('/remove-user/{id}', function ($id) {
     if(Auth::user()->id !== $id) {
-        \App\User::destroy($id);
+        User::destroy($id);
     }
         return back();
 })->name('remove-user');
@@ -331,7 +334,7 @@ Route::get('/remove-user/{id}', function ($id) {
 Route::get('/block-user/{id}', function ($id) {
 
     if(Auth::user()->id !== $id) {
-
+        User::destroy($id);
     }
 
     return back();
@@ -351,3 +354,16 @@ Route::get('/superuser-orders', function () {
         'orders' => Order::all(),
     ]);
 });
+
+Route::get('/ban-seller/{id}', function ($id) {
+    Seller::destroy($id);
+    return back();
+})->name('ban-seller');
+
+Route::get('/ban-products/{id}', function ($id) {
+    $products = Product::where('seller_id', '=', $id);
+    foreach ($products as $i) {
+        Product::destroy($i->id);
+    }
+    return back();
+})->name('ban-products');
