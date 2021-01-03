@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderedProduct;
 use App\Models\Product;
+use App\ProductFeedback;
 use App\Seller;
 use App\User;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ Route::get('/', function () {
     }
 
     $category_list = \App\Models\Category::all();
-    $chosen_list = empty(Chosen::all()) ? null : Chosen::all();
+    $chosen_list = empty(Chosen::all()) ? null : Chosen::all()->toArray();
     return view('welcome', [
         'product_list' => $product_list,
         'category_list' => $category_list,
@@ -78,7 +79,7 @@ Route::get('/my-account/address', function () {
     $category_list = \App\Models\Category::all();
     $seller = Seller::where('user_id', '=', Auth::user()->id)->get()->first();
     return view('my_account_address', ['seller' => $seller, 'category_list' => $category_list]);
-})->name('address')->middleware('auth');;
+})->name('address')->middleware('auth');
 
 
 Route::get('/login', function () {
@@ -88,7 +89,7 @@ Route::get('/login', function () {
 Route::post('/login', [SessionController::class, 'store'])->name('login');
 Route::get('/logout', function () {
     Auth::logout();
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Route::get('/forgot-password', function () {
@@ -191,8 +192,8 @@ Route::get('/remove-product/{id}', function ($id) {
 Route::get('/product/{id}', function ($id) {
     return view('product', [
         'item' => Product::find($id),
-        'product_comments' => \App\Models\Comment::where('product_id', '=', $id),
         'category_list' => \App\Models\Category::all(),
+        'comments' => Product::find($id)->productFeedback()->get()
     ]);
 })->name('product');
 
@@ -316,9 +317,19 @@ Route::post('/add-product', function (Request $request){
         return back();
 })->name('add-product');
 
-Route::post('/add-comment', function (Request $request) {
-
+Route::post('/add-comment/{id}', function ($id) {
+    if(Auth::check()) {
+        $comment = \request()->input('product_comment');
+        $prodFeedback = new ProductFeedback();
+        $prodFeedback->user_id = Auth::user()->id;
+        $prodFeedback->product_id = $id;
+        $prodFeedback->text = $comment;
+        $prodFeedback->save();
+        return back();
+    }
+    return back()->withErrors(['user.required' => 'Коментарі можуть залишати тільки зареєстровані користувачі!!']);
 })->name('add-comment');
+
 Route::get('/superuser-main', function () {
     $orders = Order::all();
     $sum  = 0;
@@ -451,7 +462,7 @@ Route::get('/{id}', function ($id) {
 })->name('home-category');
 
 Route::get('/edit-product/{id}', function ($id) {
-
+//    return
 })->name('edit-product');
 
 Route::get('/promote-product/{id}', function ($id) {

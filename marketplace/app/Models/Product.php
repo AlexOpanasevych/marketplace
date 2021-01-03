@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\ProductFeedback;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,10 @@ class Product extends Model
 
     public function ordered_product() {
         return $this->hasMany(OrderedProduct::class);
+    }
+
+    public function productFeedback() {
+        return $this->hasMany(ProductFeedback::class);
     }
     public $timestamps = FALSE;
 }

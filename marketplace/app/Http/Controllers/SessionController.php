@@ -22,12 +22,13 @@ class SessionController extends Controller
         $result = $request->input('email');
         if (filter_var($result, FILTER_VALIDATE_EMAIL)){
             if (!Auth::attempt(['email' => $result, 'password' => $request->input('password')], $request->has('remember'))) {
-                return
-                    back()->withErrors([
-                    'message' => 'Email чи пароль неправильні, спробуйте знову'
-                ]);
+                return back();
+//                    back()->withErrors([
+//                    'message' => 'Email чи пароль неправильні, спробуйте знову'
+//                ]);
             }
         }
+//        return "";
 //        else {
 //            if (Auth::attempt(['name' => $result, 'password' => $request->input('password')]) == false) {
 //                return back()->withErrors([
@@ -35,12 +36,9 @@ class SessionController extends Controller
 //                ]);
 //            }
 //        }
+//        $seller = Seller::where('user_id', '=', Auth::user()->id)->first();
 
-        $seller = Seller::where('user_id', '=', Auth::user()->id);
-
-        return redirect()->route('info')->with([
-            'seller' => $seller,
-        ]);
+        return redirect()->route('home');
     }
 
     public function destroy()

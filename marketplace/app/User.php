@@ -70,4 +70,8 @@ class User extends Authenticatable
     public function sellerRequest() {
         return $this->hasOne(SellerRequest::class);
     }
+
+    public function productFeedback() {
+        return $this->hasMany(ProductFeedback::class);
+    }
 }

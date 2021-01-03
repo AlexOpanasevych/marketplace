@@ -26,7 +26,7 @@
                             <option>{{$category->category_name}}</option>
                         @endforeach
                     </select>
-                    <button type="submit" name="confirm_delivery">Оформити замовлення</button>
+                    <button type="submit" name="confirm_delivery">Додати товар</button>
                 </div>
             </form>
         </div>

@@ -27,5 +27,6 @@ class ChosenController extends Controller
 
     public function removeFromChosen($chosen_id) {
         Chosen::destroy($chosen_id);
+        return back();
     }
 }

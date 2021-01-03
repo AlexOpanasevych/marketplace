@@ -1,9 +1,9 @@
 <div class="card border-black small" style="background-color: #ebebeb; margin-bottom: 20px">
     <div class="view overlay" style="font-size: 13px">
-        <a class="chosen_cancel" href="{{route('remove-chosen', ['id' => $item->id])}}"><div><img height="25px" src="{{asset($item->photo_path)}}"></div></a>
-        <a href="">
+        <a class="chosen_cancel" href="{{route('remove-chosen', ['id' => $item->id])}}"><div><img height="25px" src="{{asset('img/delete_acc.svg')}}"></div></a>
+        <a href="{{route('product', ['id' => $item->product()->first()->id])}}">
             <div class="mask rgba-white-light">
-                <img style="margin-top: 20px" class="card-img-top" src="{{asset('img/products'.$item->product()->first()->photo_path)}}">
+                <img style="margin-top: 20px" class="card-img-top" src="{{asset('img/products/'.$item->product()->first()->photo_path)}}">
             </div>
         </a>
         <div class="card-body text-left">

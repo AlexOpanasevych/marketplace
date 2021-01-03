@@ -39,8 +39,8 @@
                         <div class="col-md-4">Товар: <a style="color: black; font-weight: bold" href="{{route('product', ['id' => $i->id])}}">{{$i->product_name}}</a></div>
                         <div class="col-md-4">Продавець: {{Auth::user()->seller()->first()->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
-                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary "><a href="{{route('edit-product', ['id' => $i->id])}}">Змінити</a></button>
-                            <button style=" min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('remove-product', ['id' => $i->id])}}">Заблокувати</a></button>
+                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary "><a style="color: white !important" href="{{route('edit-product', ['id' => $i->id])}}">Змінити</a></button>
+                            <button style=" min-width: 100px" type="button" class="btn btn-danger "><a style="color: white !important" href="{{route('remove-product', ['id' => $i->id])}}">Заблокувати</a></button>
                         </div>
                     </div>
                 </div>
@@ -50,8 +50,8 @@
                         <div class="col-md-4">Товар: <a style="color: black; font-weight: bold" href="{{route('product', ['id' => $i->id])}}">{{$i->product_name}}</a></div>
                         <div class="col-md-4">Продавець: {{Auth::user()->seller()->first()->company_name}}</div>
                         <div class="col-md-4 d-flex justify-content-end" style="font-size: 10px">
-                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary "><a href="{{route('edit-product', ['id' => $i->id])}}">Змінити</a></button>
-                            <button style=" min-width: 100px" type="button" class="btn btn-danger "><a href="{{route('remove-product', ['id' => $i->id])}}">Заблокувати</a></button>
+                            <button style="margin-right: 5px; min-width: 100px" type="button" class="btn btn-primary "><a style="color: white !important" href="{{route('edit-product', ['id' => $i->id])}}">Змінити</a></button>
+                            <button style=" min-width: 100px" type="button" class="btn btn-danger "><a style="color: white !important" href="{{route('remove-product', ['id' => $i->id])}}">Заблокувати</a></button>
                         </div>
                     </div>
                 </div>
